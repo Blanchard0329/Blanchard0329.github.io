@@ -23,7 +23,8 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #a1a1aa;
         }
-        .fade-in {
+        /* 仅保留初始加载时的淡入动画，避免后续操作闪烁 */
+        .fade-in-init {
             animation: fadeIn 0.5s ease-in-out;
         }
         @keyframes fadeIn {
@@ -106,7 +107,7 @@
                 </div>
 
                 <!-- 成功提示 -->
-                <div id="success-message" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 fade-in">
+                <div id="success-message" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 fade-in-init">
                     <i data-lucide="alert-circle" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
                     <div class="text-sm text-green-800">
                         <p class="font-bold">文件下载成功！</p>
@@ -182,7 +183,7 @@
 
         const subjectsByGrade = getSubjectsByGrade();
 
-        // 渲染主界面
+        // 渲染主界面 (只在初始化时调用一次)
         function renderSections() {
             const container = document.getElementById('sections-container');
             container.innerHTML = '';
@@ -193,7 +194,7 @@
 
                 // 创建 Section 容器
                 const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'fade-in';
+                sectionDiv.className = 'fade-in-init'; // 仅初始化时淡入
                 
                 // 标题
                 sectionDiv.innerHTML = `
@@ -214,29 +215,10 @@
                     const isSelected = state.selectedSubjects.has(sub.fullKey);
                     const btn = document.createElement('button');
                     
-                    // 动态设置样式
-                    btn.className = `
-                        relative flex flex-col items-start p-3 rounded-xl border-2 transition-all duration-200 text-left w-full
-                        ${isSelected 
-                            ? 'border-indigo-500 bg-indigo-50/50 shadow-sm' 
-                            : 'border-gray-100 hover:border-indigo-200 hover:bg-gray-50'}
-                    `;
-                    
-                    btn.onclick = () => toggleSubject(sub.fullKey);
+                    // 绑定点击事件，传入当前的 sub 数据和按钮元素本身
+                    btn.onclick = (e) => toggleSubject(sub.fullKey, sub, e.currentTarget);
 
-                    const badgeColor = sub.board === 'CIE' ? 'bg-orange-500' : 'bg-blue-500';
-                    
-                    btn.innerHTML = `
-                        <div class="flex justify-between w-full items-start mb-1">
-                            <span class="text-xs font-bold px-2 py-0.5 rounded text-white ${badgeColor}">
-                                ${sub.board}
-                            </span>
-                            ${isSelected ? '<i data-lucide="check" class="w-5 h-5 text-indigo-600"></i>' : ''}
-                        </div>
-                        <span class="font-semibold ${isSelected ? 'text-indigo-900' : 'text-gray-700'}">
-                            ${sub.name}
-                        </span>
-                    `;
+                    updateButtonVisual(btn, sub, isSelected);
                     gridDiv.appendChild(btn);
                 });
 
@@ -248,16 +230,50 @@
             lucide.createIcons();
         }
 
-        // 切换科目选中状态
-        function toggleSubject(key) {
+        // 辅助函数：更新单个按钮的视觉样式
+        function updateButtonVisual(btn, sub, isSelected) {
+            btn.className = `
+                relative flex flex-col items-start p-3 rounded-xl border-2 transition-all duration-200 text-left w-full
+                ${isSelected 
+                    ? 'border-indigo-500 bg-indigo-50/50 shadow-sm' 
+                    : 'border-gray-100 hover:border-indigo-200 hover:bg-gray-50'}
+            `;
+            
+            const badgeColor = sub.board === 'CIE' ? 'bg-orange-500' : 'bg-blue-500';
+            
+            btn.innerHTML = `
+                <div class="flex justify-between w-full items-start mb-1">
+                    <span class="text-xs font-bold px-2 py-0.5 rounded text-white ${badgeColor}">
+                        ${sub.board}
+                    </span>
+                    ${isSelected ? '<i data-lucide="check" class="w-5 h-5 text-indigo-600"></i>' : ''}
+                </div>
+                <span class="font-semibold ${isSelected ? 'text-indigo-900' : 'text-gray-700'}">
+                    ${sub.name}
+                </span>
+            `;
+        }
+
+        // 切换科目选中状态 (修改后：不再重新渲染整个列表，只更新当前按钮)
+        function toggleSubject(key, subData, btnElement) {
+            // 更新状态
             if (state.selectedSubjects.has(key)) {
                 state.selectedSubjects.delete(key);
             } else {
                 state.selectedSubjects.add(key);
             }
+
             // 隐藏之前的成功消息
             document.getElementById('success-message').classList.add('hidden');
-            renderSections();
+            
+            // 1. 只更新当前被点击按钮的样式
+            const isSelected = state.selectedSubjects.has(key);
+            updateButtonVisual(btnElement, subData, isSelected);
+            
+            // 2. 因为 innerHTML 变了，图标需要重新渲染一下
+            lucide.createIcons();
+
+            // 3. 更新底部的预览表格
             updatePreview();
         }
 
@@ -282,7 +298,6 @@
             const myExams = getMyExams();
             const statusText = document.getElementById('preview-status-text');
             const bellContainer = document.getElementById('bell-icon-container');
-            const bellIcon = bellContainer.querySelector('i'); // Get the icon element
 
             // 更新文字
             if (myExams.length === 0) {
@@ -294,8 +309,6 @@
             // 更新铃铛样式
             if (state.includeAlerts) {
                 bellContainer.className = "p-2 rounded-full transition-colors bg-indigo-100";
-                // 使用 Lucide API 更新图标（如果不方便直接操作DOM，我们可以重绘）
-                // 简单的做法是直接替换innerHTML并重新初始化Lucide
                 bellContainer.innerHTML = '<i data-lucide="bell" class="w-6 h-6 text-indigo-600"></i>';
             } else {
                 bellContainer.className = "p-2 rounded-full transition-colors bg-gray-100";
