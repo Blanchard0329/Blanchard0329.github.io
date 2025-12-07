@@ -1,120 +1,361 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2025 考试季日历生成器</title>
-
-    <!-- Tailwind CDN -->
+    <!-- 引入 Tailwind CSS 进行样式设计 -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Lucide 图标库 -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* 自定义滚动条样式，更美观 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c7c7cc;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a1a1aa;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 min-h-screen py-8 px-4">
 
-    <!-- React CDN -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200">
+        
+        <!-- 头部区域 -->
+        <div class="bg-indigo-600 p-8 text-white">
+            <h1 class="text-3xl font-bold flex items-center gap-3">
+                <i data-lucide="calendar" class="w-8 h-8"></i>
+                2025 考试季日历生成器
+            </h1>
+            <p class="mt-3 text-indigo-100 max-w-2xl">
+                专为 IG, AS, A-Level 同学设计。勾选你的科目，自动生成包含<b>考前提醒</b>、<b>考试局</b>及<b>考场信息</b>的专属日历。
+            </p>
+        </div>
 
-    <!-- Babel for JSX in-browser -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
+        <div class="p-8">
+            <!-- 考试科目选择区域 (将由 JS 动态生成) -->
+            <div id="sections-container" class="space-y-10">
+                <!-- 内容加载中... -->
+            </div>
 
-  <body class="bg-gray-50">
-    <div id="root"></div>
+            <!-- 底部预览和操作区域 -->
+            <div class="mt-12 pt-8 border-t border-gray-100">
+                <div class="flex flex-col sm:flex-row items-end justify-between mb-6 gap-4">
+                    <!-- 左侧状态 -->
+                    <div class="flex items-center gap-3">
+                        <div id="bell-icon-container" class="p-2 rounded-full transition-colors bg-indigo-100">
+                            <i data-lucide="bell" class="w-6 h-6 text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-bold text-gray-900">已选考试预览</h2>
+                            <p id="preview-status-text" class="text-sm text-gray-500">
+                                请选择科目...
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧操作 -->
+                    <div class="flex flex-col items-end gap-3">
+                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-600 hover:text-indigo-700 transition-colors select-none bg-white px-2 py-1 rounded border border-transparent hover:border-gray-100">
+                            <input type="checkbox" id="alert-toggle" checked class="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500 accent-indigo-600">
+                            <span>添加考前提醒</span>
+                        </label>
 
-    <script type="text/babel">
-      const { useState, useMemo } = React;
+                        <button id="generate-btn" disabled class="flex items-center gap-2 px-6 py-3 rounded-lg font-bold shadow-md transition-all bg-gray-200 text-gray-400 cursor-not-allowed">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                            生成日历 (.ics)
+                        </button>
+                    </div>
+                </div>
 
-      // --- 1. 考试数据源 ---
-      const EXAM_DATA = [
-        // --- IGCSE 示例数据 ---
-        { id: 'ig_math_p2', grade: 'IGCSE', board: 'CIE', subject: 'Maths (0580)', paper: 'Paper 2 (Extended)', date: '2025-05-02', time: '09:00', duration: 90 },
-        { id: 'ig_math_p4', grade: 'IGCSE', board: 'CIE', subject: 'Maths (0580)', paper: 'Paper 4 (Extended)', date: '2025-05-05', time: '13:00', duration: 150 },
-        { id: 'ig_phy_p4', grade: 'IGCSE', board: 'CIE', subject: 'Physics (0625)', paper: 'Theory', date: '2025-05-12', time: '09:00', duration: 75 },
+                <!-- 列表预览容器 -->
+                <div id="preview-container" class="bg-white rounded-xl border border-gray-200 shadow-inner overflow-hidden max-h-[500px] overflow-y-auto hidden">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-gray-50 text-gray-500 font-medium border-b border-gray-200 sticky top-0">
+                            <tr>
+                                <th class="p-4">日期</th>
+                                <th class="p-4">时间</th>
+                                <th class="p-4">科目 / 试卷</th>
+                                <th class="p-4 hidden sm:table-cell">考试局</th>
+                            </tr>
+                        </thead>
+                        <tbody id="preview-table-body" class="divide-y divide-gray-100">
+                            <!-- 行数据将由 JS 插入 -->
+                        </tbody>
+                    </table>
+                </div>
 
-        // --- AS Level 示例数据 ---
-        { id: 'as_econ_p1', grade: 'AS', board: 'CIE', subject: 'Economics (9708)', paper: 'Multiple Choice', date: '2025-06-10', time: '13:00', duration: 60 },
-        { id: 'as_econ_p2', grade: 'AS', board: 'CIE', subject: 'Economics (9708)', paper: 'Data Response', date: '2025-05-12', time: '09:00', duration: 90 },
-        { id: 'as_math_pure', grade: 'AS', board: 'Edexcel', subject: 'Maths (Pure)', paper: 'Pure 1', date: '2025-05-15', time: '09:00', duration: 120 },
+                <!-- 空状态提示 -->
+                <div id="empty-state" class="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                    <p class="text-gray-400">请在上方选择科目以预览详情</p>
+                </div>
 
-        // --- A Level 示例数据 ---
-        { id: 'al_psy_p3', grade: 'ALevel', board: 'CIE', subject: 'Psychology (9990)', paper: 'Specialist Options', date: '2025-05-20', time: '09:00', duration: 90 },
-        { id: 'al_chem_p4', grade: 'ALevel', board: 'CIE', subject: 'Chemistry (9701)', paper: 'Structured Questions', date: '2025-05-22', time: '13:00', duration: 120 },
-        { id: 'al_math_stat', grade: 'ALevel', board: 'Edexcel', subject: 'Maths (Stats)', paper: 'Statistics 2', date: '2025-06-01', time: '09:00', duration: 90 },
-      ];
+                <!-- 成功提示 -->
+                <div id="success-message" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 fade-in">
+                    <i data-lucide="alert-circle" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
+                    <div class="text-sm text-green-800">
+                        <p class="font-bold">文件下载成功！</p>
+                        <p id="success-desc">请在手机或电脑上打开该文件。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="text-center mt-8 text-gray-400 text-xs">
+        <p>Supported Exam Boards: CIE & Edexcel • Exam Season 2025</p>
+    </div>
 
-      // 定义年级显示的顺序和标题
-      // HTML 单文件版本不使用 lucide-react，改用 emoji / 文本图标
-      const GRADE_SECTIONS = [
-        { key: 'IGCSE', title: 'IGCSE', icon: '📘' },
-        { key: 'AS', title: 'AS Level', icon: '🧩' },
-        { key: 'ALevel', title: 'A Level', icon: '🎓' },
-      ];
+    <!-- 逻辑脚本 -->
+    <script>
+        // --- 1. 数据源配置 ---
+        // 你可以在这里添加更多的考试数据
+        const EXAM_DATA = [
+            // --- IGCSE ---
+            { id: 'ig_math_p2', grade: 'IGCSE', board: 'CIE', subject: 'Maths (0580)', paper: 'Paper 2 (Extended)', date: '2025-05-02', time: '09:00', duration: 90 },
+            { id: 'ig_math_p4', grade: 'IGCSE', board: 'CIE', subject: 'Maths (0580)', paper: 'Paper 4 (Extended)', date: '2025-05-05', time: '13:00', duration: 150 },
+            { id: 'ig_phy_p4', grade: 'IGCSE', board: 'CIE', subject: 'Physics (0625)', paper: 'Theory', date: '2025-05-12', time: '09:00', duration: 75 },
+            
+            // --- AS Level ---
+            { id: 'as_econ_p1', grade: 'AS', board: 'CIE', subject: 'Economics (9708)', paper: 'Multiple Choice', date: '2025-06-10', time: '13:00', duration: 60 },
+            { id: 'as_econ_p2', grade: 'AS', board: 'CIE', subject: 'Economics (9708)', paper: 'Data Response', date: '2025-05-12', time: '09:00', duration: 90 },
+            { id: 'as_math_pure', grade: 'AS', board: 'Edexcel', subject: 'Maths (Pure)', paper: 'Pure 1', date: '2025-05-15', time: '09:00', duration: 120 },
+            
+            // --- A Level ---
+            { id: 'al_psy_p3', grade: 'ALevel', board: 'CIE', subject: 'Psychology (9990)', paper: 'Specialist Options', date: '2025-05-20', time: '09:00', duration: 90 },
+            { id: 'al_chem_p4', grade: 'ALevel', board: 'CIE', subject: 'Chemistry (9701)', paper: 'Structured Questions', date: '2025-05-22', time: '13:00', duration: 120 },
+            { id: 'al_math_stat', grade: 'ALevel', board: 'Edexcel', subject: 'Maths (Stats)', paper: 'Statistics 2', date: '2025-06-01', time: '09:00', duration: 90 },
+        ];
 
-      function App() {
-        const [selectedSubjects, setSelectedSubjects] = useState([]);
-        const [generated, setGenerated] = useState(false);
+        const GRADE_SECTIONS = [
+            { key: 'IGCSE', title: 'IGCSE', icon: 'book-open' },
+            { key: 'AS', title: 'AS Level', icon: 'layers' },
+            { key: 'ALevel', title: 'A Level', icon: 'graduation-cap' },
+        ];
 
-        // 提取每个年级的唯一科目
-        const subjectsByGrade = useMemo(() => {
-          const grouped = {};
-          GRADE_SECTIONS.forEach(section => {
-            const examsInGrade = EXAM_DATA.filter(e => e.grade === section.key);
-            const unique = [];
-            const seen = new Set();
+        // --- 2. 状态管理 ---
+        let state = {
+            selectedSubjects: new Set(), // 存储选中的 "subject|board" 字符串
+            includeAlerts: true
+        };
 
-            examsInGrade.forEach(exam => {
-              const uniqueKey = `${exam.subject}|${exam.board}`;
-              if (!seen.has(uniqueKey)) {
-                seen.add(uniqueKey);
-                unique.push({
-                  name: exam.subject,
-                  board: exam.board,
-                  fullKey: uniqueKey
+        // --- 3. 初始化与渲染逻辑 ---
+        
+        // 预处理数据：按年级分组并提取唯一科目
+        function getSubjectsByGrade() {
+            const grouped = {};
+            GRADE_SECTIONS.forEach(section => {
+                const examsInGrade = EXAM_DATA.filter(e => e.grade === section.key);
+                const unique = [];
+                const seen = new Set();
+                
+                examsInGrade.forEach(exam => {
+                    const uniqueKey = `${exam.subject}|${exam.board}`;
+                    if (!seen.has(uniqueKey)) {
+                        seen.add(uniqueKey);
+                        unique.push({
+                            name: exam.subject,
+                            board: exam.board,
+                            fullKey: uniqueKey
+                        });
+                    }
                 });
-              }
+                grouped[section.key] = unique;
             });
-            grouped[section.key] = unique;
-          });
-          return grouped;
-        }, []);
+            return grouped;
+        }
 
-        const toggleSubject = (subjectKey) => {
-          setSelectedSubjects(prev =>
-            prev.includes(subjectKey)
-              ? prev.filter(s => s !== subjectKey)
-              : [...prev, subjectKey]
-          );
-          setGenerated(false);
-        };
+        const subjectsByGrade = getSubjectsByGrade();
 
-        const myExams = useMemo(() => {
-          return EXAM_DATA
-            .filter(exam => selectedSubjects.includes(`${exam.subject}|${exam.board}`))
-            .sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
-        }, [selectedSubjects]);
+        // 渲染主界面
+        function renderSections() {
+            const container = document.getElementById('sections-container');
+            container.innerHTML = '';
 
-        // --------- 关键修复：ICS 时间不要用 toISOString() ---------
-        // 否则会变成 UTC + Z，导入后可能出现时区错位。
-        // 这里用“本地时间字符串”，并加 TZID（可改）。
-        const TZID = "Asia/Shanghai"; 
-        // 如果你要改成别的时区，例如洛杉矶：
-        // const TZID = "America/Los_Angeles";
+            GRADE_SECTIONS.forEach(section => {
+                const subjects = subjectsByGrade[section.key];
+                if (!subjects || subjects.length === 0) return;
 
-        const pad = (n) => String(n).padStart(2, "0");
+                // 创建 Section 容器
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'fade-in';
+                
+                // 标题
+                sectionDiv.innerHTML = `
+                    <h2 class="text-xl font-bold flex items-center gap-2 mb-4 text-gray-800 border-b border-gray-100 pb-2">
+                        <span class="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
+                            <i data-lucide="${section.icon}" class="w-5 h-5"></i>
+                        </span>
+                        ${section.title}
+                    </h2>
+                `;
 
-        const formatLocalICSDate = (dateObj) => {
-          const y = dateObj.getFullYear();
-          const m = pad(dateObj.getMonth() + 1);
-          const d = pad(dateObj.getDate());
-          const hh = pad(dateObj.getHours());
-          const mm = pad(dateObj.getMinutes());
-          const ss = pad(dateObj.getSeconds());
-          // 不带 Z，表示“本地/指定时区的浮动时间”
-          return `${y}${m}${d}T${hh}${mm}${ss}`;
-        };
+                // 网格容器
+                const gridDiv = document.createElement('div');
+                gridDiv.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3';
 
-        const generateICSFile = () => {
-          if (myExams.length === 0) return;
+                // 生成按钮
+                subjects.forEach(sub => {
+                    const isSelected = state.selectedSubjects.has(sub.fullKey);
+                    const btn = document.createElement('button');
+                    
+                    // 动态设置样式
+                    btn.className = `
+                        relative flex flex-col items-start p-3 rounded-xl border-2 transition-all duration-200 text-left w-full
+                        ${isSelected 
+                            ? 'border-indigo-500 bg-indigo-50/50 shadow-sm' 
+                            : 'border-gray-100 hover:border-indigo-200 hover:bg-gray-50'}
+                    `;
+                    
+                    btn.onclick = () => toggleSubject(sub.fullKey);
 
-          let icsContent =
+                    const badgeColor = sub.board === 'CIE' ? 'bg-orange-500' : 'bg-blue-500';
+                    
+                    btn.innerHTML = `
+                        <div class="flex justify-between w-full items-start mb-1">
+                            <span class="text-xs font-bold px-2 py-0.5 rounded text-white ${badgeColor}">
+                                ${sub.board}
+                            </span>
+                            ${isSelected ? '<i data-lucide="check" class="w-5 h-5 text-indigo-600"></i>' : ''}
+                        </div>
+                        <span class="font-semibold ${isSelected ? 'text-indigo-900' : 'text-gray-700'}">
+                            ${sub.name}
+                        </span>
+                    `;
+                    gridDiv.appendChild(btn);
+                });
+
+                sectionDiv.appendChild(gridDiv);
+                container.appendChild(sectionDiv);
+            });
+            
+            // 刷新图标
+            lucide.createIcons();
+        }
+
+        // 切换科目选中状态
+        function toggleSubject(key) {
+            if (state.selectedSubjects.has(key)) {
+                state.selectedSubjects.delete(key);
+            } else {
+                state.selectedSubjects.add(key);
+            }
+            // 隐藏之前的成功消息
+            document.getElementById('success-message').classList.add('hidden');
+            renderSections();
+            updatePreview();
+        }
+
+        // 切换提醒开关
+        document.getElementById('alert-toggle').addEventListener('change', (e) => {
+            state.includeAlerts = e.target.checked;
+            updatePreviewUIStatus();
+            // 隐藏之前的成功消息
+            document.getElementById('success-message').classList.add('hidden');
+        });
+
+        // 获取当前选中的所有考试
+        function getMyExams() {
+            return EXAM_DATA.filter(exam => {
+                const key = `${exam.subject}|${exam.board}`;
+                return state.selectedSubjects.has(key);
+            }).sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
+        }
+
+        // 更新底部的状态文字和图标
+        function updatePreviewUIStatus() {
+            const myExams = getMyExams();
+            const statusText = document.getElementById('preview-status-text');
+            const bellContainer = document.getElementById('bell-icon-container');
+            const bellIcon = bellContainer.querySelector('i'); // Get the icon element
+
+            // 更新文字
+            if (myExams.length === 0) {
+                statusText.innerText = "请选择科目...";
+            } else {
+                statusText.innerText = `共 ${myExams.length} 场考试 • ${state.includeAlerts ? '已开启自动提醒 (1天前 & 2小时前)' : '自动提醒已关闭'}`;
+            }
+
+            // 更新铃铛样式
+            if (state.includeAlerts) {
+                bellContainer.className = "p-2 rounded-full transition-colors bg-indigo-100";
+                // 使用 Lucide API 更新图标（如果不方便直接操作DOM，我们可以重绘）
+                // 简单的做法是直接替换innerHTML并重新初始化Lucide
+                bellContainer.innerHTML = '<i data-lucide="bell" class="w-6 h-6 text-indigo-600"></i>';
+            } else {
+                bellContainer.className = "p-2 rounded-full transition-colors bg-gray-100";
+                bellContainer.innerHTML = '<i data-lucide="bell-off" class="w-6 h-6 text-gray-400"></i>';
+            }
+            lucide.createIcons();
+        }
+
+        // 更新预览表格
+        function updatePreview() {
+            const myExams = getMyExams();
+            const tableBody = document.getElementById('preview-table-body');
+            const emptyState = document.getElementById('empty-state');
+            const previewContainer = document.getElementById('preview-container');
+            const generateBtn = document.getElementById('generate-btn');
+
+            updatePreviewUIStatus();
+
+            if (myExams.length === 0) {
+                emptyState.classList.remove('hidden');
+                previewContainer.classList.add('hidden');
+                generateBtn.disabled = true;
+                generateBtn.className = "flex items-center gap-2 px-6 py-3 rounded-lg font-bold shadow-md transition-all bg-gray-200 text-gray-400 cursor-not-allowed";
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            previewContainer.classList.remove('hidden');
+            
+            // 激活按钮
+            generateBtn.disabled = false;
+            generateBtn.className = "flex items-center gap-2 px-6 py-3 rounded-lg font-bold shadow-md transition-all bg-indigo-600 hover:bg-indigo-700 text-white hover:scale-105 active:scale-95 cursor-pointer";
+
+            // 渲染表格行
+            tableBody.innerHTML = myExams.map(exam => `
+                <tr class="hover:bg-indigo-50/30 transition-colors">
+                    <td class="p-4 whitespace-nowrap font-medium text-gray-900">${exam.date}</td>
+                    <td class="p-4 whitespace-nowrap text-gray-600">
+                        ${exam.time} <span class="text-xs text-gray-400">(${exam.duration}m)</span>
+                    </td>
+                    <td class="p-4">
+                        <div class="font-bold text-indigo-900">${exam.subject}</div>
+                        <div class="text-gray-500">${exam.paper}</div>
+                        <div class="text-xs text-orange-600 mt-1 font-medium">请提前15分钟到达</div>
+                    </td>
+                    <td class="p-4 hidden sm:table-cell">
+                        <span class="text-xs font-bold px-2 py-1 rounded ${exam.board === 'CIE' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}">
+                            ${exam.board}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // --- 4. 生成 ICS 文件逻辑 ---
+        document.getElementById('generate-btn').addEventListener('click', () => {
+            const myExams = getMyExams();
+            if (myExams.length === 0) return;
+
+            let icsContent = 
 `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//MySchool//ExamSchedule//EN
@@ -122,37 +363,30 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 `;
 
-          myExams.forEach(exam => {
-            const startDateTime = new Date(`${exam.date}T${exam.time}`);
-            const endDateTime = new Date(startDateTime.getTime() + exam.duration * 60000);
+            myExams.forEach(exam => {
+                const startDateTime = new Date(`${exam.date}T${exam.time}`);
+                const endDateTime = new Date(startDateTime.getTime() + exam.duration * 60000);
 
-            const dtStart = formatLocalICSDate(startDateTime);
-            const dtEnd = formatLocalICSDate(endDateTime);
-            const nowStamp = formatLocalICSDate(new Date());
+                const formatICSDate = (date) => {
+                    return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+                };
 
-            const description = [
-              `科目: ${exam.subject}`,
-              `试卷: ${exam.paper}`,
-              `时长: ${exam.duration}分钟`,
-              `考试局: ${exam.board}`,
-              `考试房间: ${exam.room || '待定 (请查看学校公告)'}`,
-              `请提前15分钟到达考场准备。`
-            ].join('\\n');
+                const dtStart = formatICSDate(startDateTime);
+                const dtEnd = formatICSDate(endDateTime);
+                const nowStamp = formatICSDate(new Date());
 
-            // UID 用 exam.id + 当前时间，避免重复
-            const uid = `${exam.id}-${Date.now()}@myschool.com`;
+                const description = [
+                    `科目: ${exam.subject}`,
+                    `试卷: ${exam.paper}`,
+                    `时长: ${exam.duration}分钟`,
+                    `考试局: ${exam.board}`,
+                    `考试房间: ${exam.room || '待定 (请查看学校公告)'}`,
+                    `请提前15分钟到达考场准备。`
+                ].join('\\n');
 
-            icsContent +=
-`BEGIN:VEVENT
-UID:${uid}
-DTSTAMP:${nowStamp}
-DTSTART;TZID=${TZID}:${dtStart}
-DTEND;TZID=${TZID}:${dtEnd}
-SUMMARY:📝 [${exam.board}] ${exam.subject} - ${exam.paper}
-DESCRIPTION:${description}
-LOCATION:${exam.room || 'School Exam Hall'}
-STATUS:CONFIRMED
-BEGIN:VALARM
+                let alarmBlock = '';
+                if (state.includeAlerts) {
+                    alarmBlock = `BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
 DESCRIPTION:Reminder: ${exam.subject} Exam is tomorrow!
@@ -161,193 +395,49 @@ BEGIN:VALARM
 TRIGGER:-PT2H
 ACTION:DISPLAY
 DESCRIPTION:Reminder: ${exam.subject} Exam in 2 hours. Go to prep room soon!
-END:VALARM
+END:VALARM`;
+                }
+
+                icsContent += 
+`BEGIN:VEVENT
+UID:${exam.id}-${Date.now()}@myschool.com
+DTSTAMP:${nowStamp}
+DTSTART:${dtStart}
+DTEND:${dtEnd}
+SUMMARY:📝 [${exam.board}] ${exam.subject} - ${exam.paper}
+DESCRIPTION:${description}
+LOCATION:${exam.room || 'School Exam Hall'}
+STATUS:CONFIRMED
+${alarmBlock}
 END:VEVENT
 `;
-          });
+            });
 
-          icsContent += `END:VCALENDAR`;
+            icsContent += `END:VCALENDAR`;
 
-          const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-          const url = window.URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', 'My_Exam_Schedule_2025.ics');
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(url);
-          setGenerated(true);
-        };
+            // 下载文件
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'My_Exam_Schedule_2025.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
 
-        return (
-          <div className="min-h-screen py-8 px-4 font-sans text-gray-800">
-            <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200">
+            // 显示成功提示
+            const successMsg = document.getElementById('success-message');
+            const successDesc = document.getElementById('success-desc');
+            successMsg.classList.remove('hidden');
+            successDesc.innerText = state.includeAlerts 
+                ? "请在手机或电脑上打开该文件。导入后，每场考试将包含：开考前 1 天及开考前 2 小时的自动提醒。"
+                : "文件已生成（无提醒版本）。直接导入即可查看时间表。";
+        });
 
-              {/* Header */}
-              <div className="bg-indigo-600 p-8 text-white">
-                <h1 className="text-3xl font-bold flex items-center gap-3">
-                  <span className="text-3xl">🗓️</span>
-                  2025 考试季日历生成器
-                </h1>
-                <p className="mt-3 text-indigo-100 max-w-2xl">
-                  专为 IG, AS, A-Level 同学设计。勾选你的科目，自动生成包含
-                  <b>考前提醒</b>、<b>考试局</b>及<b>考场信息</b>的专属日历。
-                </p>
-              </div>
+        // 首次加载
+        renderSections();
+        updatePreview();
 
-              <div className="p-8">
-                {/* 年级/科目选择区域 */}
-                <div className="space-y-10">
-                  {GRADE_SECTIONS.map((section) => {
-                    const subjects = subjectsByGrade[section.key];
-                    if (!subjects || subjects.length === 0) return null;
-
-                    return (
-                      <div key={section.key} className="animate-in fade-in duration-500">
-                        <h2 className="text-xl font-bold flex items-center gap-2 mb-4 text-gray-800 border-b border-gray-100 pb-2">
-                          <span className="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                            {section.icon}
-                          </span>
-                          {section.title}
-                        </h2>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                          {subjects.map((sub) => {
-                            const isSelected = selectedSubjects.includes(sub.fullKey);
-
-                            return (
-                              <button
-                                key={sub.fullKey}
-                                onClick={() => toggleSubject(sub.fullKey)}
-                                className={`
-                                  relative flex flex-col items-start p-3 rounded-xl border-2 transition-all duration-200 text-left
-                                  ${isSelected
-                                    ? 'border-indigo-500 bg-indigo-50/50 shadow-sm'
-                                    : 'border-gray-100 hover:border-indigo-200 hover:bg-gray-50'
-                                  }
-                                `}
-                              >
-                                <div className="flex justify-between w-full items-start mb-1">
-                                  <span className={`text-xs font-bold px-2 py-0.5 rounded text-white
-                                    ${sub.board === 'CIE' ? 'bg-orange-500' : 'bg-blue-500'}
-                                  `}>
-                                    {sub.board}
-                                  </span>
-                                  {isSelected && <span className="text-indigo-600 text-lg">✅</span>}
-                                </div>
-                                <span className={`font-semibold ${isSelected ? 'text-indigo-900' : 'text-gray-700'}`}>
-                                  {sub.name}
-                                </span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* 预览和下载区域 */}
-                <div className="mt-12 pt-8 border-t border-gray-100">
-                  <div className="flex flex-col sm:flex-row items-center justify-between mb-6 gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="bg-indigo-100 p-2 rounded-full">
-                        <span className="text-indigo-600 text-xl">⏰</span>
-                      </div>
-                      <div>
-                        <h2 className="text-lg font-bold text-gray-900">
-                          已选考试预览
-                        </h2>
-                        <p className="text-sm text-gray-500">
-                          共 {myExams.length} 场考试 • 已配置 2 个自动提醒
-                        </p>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={generateICSFile}
-                      disabled={myExams.length === 0}
-                      className={`
-                        flex items-center gap-2 px-6 py-3 rounded-lg font-bold shadow-md transition-all
-                        ${myExams.length > 0
-                          ? 'bg-indigo-600 hover:bg-indigo-700 text-white hover:scale-105 active:scale-95'
-                          : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                        }
-                      `}
-                    >
-                      <span>⬇️</span>
-                      生成日历 (.ics)
-                    </button>
-                  </div>
-
-                  {/* 列表预览 */}
-                  {myExams.length > 0 ? (
-                    <div className="bg-white rounded-xl border border-gray-200 shadow-inner overflow-hidden max-h-[500px] overflow-y-auto">
-                      <table className="w-full text-left text-sm">
-                        <thead className="bg-gray-50 text-gray-500 font-medium border-b border-gray-200 sticky top-0">
-                          <tr>
-                            <th className="p-4">日期</th>
-                            <th className="p-4">时间</th>
-                            <th className="p-4">科目 / 试卷</th>
-                            <th className="p-4 hidden sm:table-cell">考试局</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-100">
-                          {myExams.map((exam) => (
-                            <tr key={exam.id} className="hover:bg-indigo-50/30 transition-colors">
-                              <td className="p-4 whitespace-nowrap font-medium text-gray-900">
-                                {exam.date}
-                              </td>
-                              <td className="p-4 whitespace-nowrap text-gray-600">
-                                {exam.time} <span className="text-xs text-gray-400">({exam.duration}m)</span>
-                              </td>
-                              <td className="p-4">
-                                <div className="font-bold text-indigo-900">{exam.subject}</div>
-                                <div className="text-gray-500">{exam.paper}</div>
-                                <div className="text-xs text-orange-600 mt-1 font-medium">请提前15分钟到达</div>
-                              </td>
-                              <td className="p-4 hidden sm:table-cell">
-                                <span className={`text-xs font-bold px-2 py-1 rounded 
-                                  ${exam.board === 'CIE' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}
-                                `}>
-                                  {exam.board}
-                                </span>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  ) : (
-                    <div className="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-                      <p className="text-gray-400">请在上方选择科目以预览详情</p>
-                    </div>
-                  )}
-
-                  {/* 下载成功提示 */}
-                  {generated && (
-                    <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 animate-in slide-in-from-top-2">
-                      <span className="text-green-600 text-lg">🟢</span>
-                      <div className="text-sm text-green-800">
-                        <p className="font-bold">文件下载成功！</p>
-                        <p>导入后，你会看到每场考试都有两个提醒：开考前 1 天，以及开考前 2 小时。</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="text-center mt-8 text-gray-400 text-xs">
-              <p>Supported Exam Boards: CIE & Edexcel • Exam Season 2025</p>
-            </div>
-          </div>
-        );
-      }
-
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(<App />);
     </script>
-  </body>
+</body>
 </html>
