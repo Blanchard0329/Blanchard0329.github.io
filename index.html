@@ -24,7 +24,6 @@
     </style>
 </head>
 <body class="bg-gray-50 font-sans text-gray-800 min-h-screen py-8 px-4">
-
     <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200 relative">
         
         <!-- 头部区域 -->
@@ -34,7 +33,6 @@
                 <i data-lucide="languages" class="w-3 h-3"></i>
                 <span id="lang-btn-text">English</span>
             </button>
-
             <h1 class="text-3xl font-bold flex items-center gap-3">
                 <i data-lucide="calendar" class="w-8 h-8"></i>
                 <span id="header-title">2025 考试季日历生成器</span>
@@ -43,7 +41,6 @@
             <p id="header-subtitle" class="mt-3 text-indigo-100 max-w-2xl leading-relaxed">
                 专为 IG, AS, A-Level 同学设计。勾选你的科目，自动生成包含<b>考前提醒</b>、<b>考试局</b>及<b>考场信息</b>的专属日历。
             </p>
-
             <!-- 优化后的笔记分享链接 -->
             <div class="mt-4 p-3 bg-indigo-700/50 rounded-lg border border-indigo-500/50 flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-indigo-50">
                 <span class="flex items-center gap-2">
@@ -55,7 +52,6 @@
                     <i data-lucide="external-link" class="w-3 h-3"></i>
                 </a>
             </div>
-
             <!-- 联系方式 -->
             <div class="mt-2 text-xs text-indigo-200 flex items-center gap-2">
                 <i data-lucide="mail" class="w-3 h-3"></i>
@@ -63,13 +59,11 @@
                 <a href="mailto:Blanchard.0329@gmail.com" class="hover:text-white underline">Blanchard.0329@gmail.com</a>
             </div>
         </div>
-
         <div class="p-8">
             <!-- 考试科目选择区域 -->
             <div id="sections-container" class="space-y-10">
                 <!-- 内容加载中... -->
             </div>
-
             <!-- 底部预览和操作区域 -->
             <div class="mt-12 pt-8 border-t border-gray-100">
                 <div class="flex flex-col xl:flex-row items-end justify-between mb-6 gap-6">
@@ -92,14 +86,12 @@
                             <input type="checkbox" id="alert-toggle" checked class="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500 accent-indigo-600">
                             <span id="alert-label">添加考前提醒</span>
                         </label>
-
                         <!-- 按钮组 -->
                         <div class="flex gap-2">
                             <button id="generate-img-btn" disabled onclick="generateImage()" class="flex items-center gap-2 px-4 py-3 rounded-lg font-bold shadow-md transition-all bg-gray-200 text-gray-400 cursor-not-allowed text-sm">
                                 <i data-lucide="image" class="w-4 h-4"></i>
                                 <span id="btn-img-text">生成图片 (.png)</span>
                             </button>
-
                             <button id="generate-btn" disabled class="flex items-center gap-2 px-4 py-3 rounded-lg font-bold shadow-md transition-all bg-gray-200 text-gray-400 cursor-not-allowed text-sm">
                                 <i data-lucide="download" class="w-4 h-4"></i>
                                 <span id="btn-ics-text">生成日历 (.ics)</span>
@@ -107,7 +99,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- 列表预览容器 -->
                 <div id="preview-container" class="bg-white rounded-xl border border-gray-200 shadow-inner overflow-hidden max-h-[500px] overflow-y-auto hidden">
                     <table class="w-full text-left text-sm">
@@ -124,12 +115,10 @@
                         </tbody>
                     </table>
                 </div>
-
                 <!-- 空状态提示 -->
                 <div id="empty-state" class="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
                     <p id="empty-text" class="text-gray-400">请在上方选择科目以预览详情</p>
                 </div>
-
                 <!-- 成功提示 -->
                 <div id="success-message" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 fade-in-init">
                     <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
@@ -145,9 +134,8 @@
     <div class="text-center mt-8 text-gray-400 text-xs">
         <p>Supported Exam Boards: CIE & Edexcel • Exam Season 2025 • Contact: Blanchard.0329@gmail.com</p>
     </div>
-
     <!-- 隐藏的图片生成容器 (用于 html2canvas 截图) -->
-     <div id="image-export-container" class="absolute top-0 left-0 -z-50 w-[800px] bg-white p-8" style="transform: translateX(-9999px)">
+    <div id="image-export-container" class="absolute top-0 left-0 -z-50 w-[800px] bg-white p-8" style="transform: translateX(-9999px)">
         <div class="border-2 border-indigo-600 rounded-xl overflow-hidden">
             <div class="bg-indigo-600 p-6 text-white flex justify-between items-center">
                 <div>
@@ -156,7 +144,6 @@
                 </div>
                 <div class="text-right">
                     <div class="text-2xl font-bold" id="img-total-count">0 Exams</div>
-                    <!-- 邮箱已移除 -->
                 </div>
             </div>
             <div class="p-6 bg-white">
@@ -178,7 +165,6 @@
             </div>
         </div>
     </div>
-
     <!-- 逻辑脚本 -->
     <script>
         // --- 1. 多语言配置 ---
@@ -254,7 +240,6 @@
                 imgThDetails: "Venue / Notes"
             }
         };
-
         // --- 2. 数据源配置 ---
         const EXAM_DATA = [
             // --- IGCSE ---
@@ -272,22 +257,18 @@
             { id: 'al_chem_p4', grade: 'ALevel', board: 'CIE', subject: 'Chemistry (9701)', paper: 'Structured Questions', date: '2025-05-22', time: '13:00', duration: 120 },
             { id: 'al_math_stat', grade: 'ALevel', board: 'Edexcel', subject: 'Maths (Stats)', paper: 'Statistics 2', date: '2025-06-01', time: '09:00', duration: 90 },
         ];
-
         const GRADE_SECTIONS = [
             { key: 'IGCSE', title: 'IGCSE', icon: 'book-open' },
             { key: 'AS', title: 'AS Level', icon: 'layers' },
             { key: 'ALevel', title: 'A Level', icon: 'graduation-cap' },
         ];
-
         // --- 3. 状态管理 ---
         let state = {
             selectedSubjects: new Set(),
             includeAlerts: true,
             lang: 'zh' // 默认为中文
         };
-
         // --- 4. 辅助逻辑 ---
-
         // 切换语言
         function toggleLanguage() {
             state.lang = state.lang === 'zh' ? 'en' : 'zh';
@@ -295,7 +276,6 @@
             renderSections(); // 重新渲染列表以更新年级标题（如果有需要）
             updatePreview();  // 更新预览表头的语言
         }
-
         // 更新界面所有静态文本
         function updateUIText() {
             const t = i18n[state.lang];
@@ -322,7 +302,6 @@
             document.getElementById('img-th-subject').innerText = t.imgThSubject;
             document.getElementById('img-th-details').innerText = t.imgThDetails;
         }
-
         function getSubjectsByGrade() {
             const grouped = {};
             GRADE_SECTIONS.forEach(section => {
@@ -345,26 +324,21 @@
             });
             return grouped;
         }
-
         const subjectsByGrade = getSubjectsByGrade();
-
         // 渲染选择区域
         function renderSections() {
             const container = document.getElementById('sections-container');
             container.innerHTML = '';
             const t = i18n[state.lang];
-
             GRADE_SECTIONS.forEach(section => {
                 const subjects = subjectsByGrade[section.key];
                 if (!subjects || subjects.length === 0) return;
-
                 // 动态获取年级标题
                 let gradeTitle = section.title; 
                 // 如果需要对标题也进行翻译，可以在 i18n 里做映射，目前保留原样或简单映射
                 if (section.key === 'IGCSE') gradeTitle = t.gradeIG;
                 if (section.key === 'AS') gradeTitle = t.gradeAS;
                 if (section.key === 'ALevel') gradeTitle = t.gradeAL;
-
                 const sectionDiv = document.createElement('div');
                 sectionDiv.className = 'fade-in-init'; 
                 
@@ -376,10 +350,8 @@
                         ${gradeTitle}
                     </h2>
                 `;
-
                 const gridDiv = document.createElement('div');
                 gridDiv.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3';
-
                 subjects.forEach(sub => {
                     const isSelected = state.selectedSubjects.has(sub.fullKey);
                     const btn = document.createElement('button');
@@ -387,13 +359,11 @@
                     updateButtonVisual(btn, sub, isSelected);
                     gridDiv.appendChild(btn);
                 });
-
                 sectionDiv.appendChild(gridDiv);
                 container.appendChild(sectionDiv);
             });
             lucide.createIcons();
         }
-
         function updateButtonVisual(btn, sub, isSelected) {
             btn.className = `
                 relative flex flex-col items-start p-3 rounded-xl border-2 transition-all duration-200 text-left w-full
@@ -414,7 +384,6 @@
                 </span>
             `;
         }
-
         function toggleSubject(key, subData, btnElement) {
             if (state.selectedSubjects.has(key)) {
                 state.selectedSubjects.delete(key);
@@ -427,32 +396,27 @@
             lucide.createIcons();
             updatePreview();
         }
-
         document.getElementById('alert-toggle').addEventListener('change', (e) => {
             state.includeAlerts = e.target.checked;
             updatePreviewUIStatus();
             document.getElementById('success-message').classList.add('hidden');
         });
-
         function getMyExams() {
             return EXAM_DATA.filter(exam => {
                 const key = `${exam.subject}|${exam.board}`;
                 return state.selectedSubjects.has(key);
             }).sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
         }
-
         function updatePreviewUIStatus() {
             const myExams = getMyExams();
             const statusText = document.getElementById('preview-status-text');
             const bellContainer = document.getElementById('bell-icon-container');
             const t = i18n[state.lang];
-
             if (myExams.length === 0) {
                 statusText.innerText = t.statusEmpty;
             } else {
                 statusText.innerText = t.statusSelected(myExams.length, state.includeAlerts);
             }
-
             if (state.includeAlerts) {
                 bellContainer.className = "p-2 rounded-full transition-colors bg-indigo-100 shrink-0";
                 bellContainer.innerHTML = '<i data-lucide="bell" class="w-6 h-6 text-indigo-600"></i>';
@@ -462,7 +426,6 @@
             }
             lucide.createIcons();
         }
-
         function updatePreview() {
             const myExams = getMyExams();
             const tableBody = document.getElementById('preview-table-body');
@@ -471,9 +434,7 @@
             const generateBtn = document.getElementById('generate-btn');
             const generateImgBtn = document.getElementById('generate-img-btn');
             const t = i18n[state.lang];
-
             updatePreviewUIStatus();
-
             if (myExams.length === 0) {
                 emptyState.classList.remove('hidden');
                 previewContainer.classList.add('hidden');
@@ -484,7 +445,6 @@
                 generateImgBtn.className = disabledClass;
                 return;
             }
-
             emptyState.classList.add('hidden');
             previewContainer.classList.remove('hidden');
             
@@ -496,7 +456,6 @@
             
             generateImgBtn.disabled = false;
             generateImgBtn.className = activeImgClass;
-
             tableBody.innerHTML = myExams.map(exam => `
                 <tr class="hover:bg-indigo-50/30 transition-colors">
                     <td class="p-4 whitespace-nowrap font-medium text-gray-900">${exam.date}</td>
@@ -516,13 +475,11 @@
                 </tr>
             `).join('');
         }
-
         // --- 5. 生成 ICS 逻辑 ---
         document.getElementById('generate-btn').addEventListener('click', () => {
             const myExams = getMyExams();
             if (myExams.length === 0) return;
             const t = i18n[state.lang];
-
             let icsContent = 
 `BEGIN:VCALENDAR
 VERSION:2.0
@@ -534,7 +491,6 @@ METHOD:PUBLISH
                 const startDateTime = new Date(`${exam.date}T${exam.time}`);
                 const endDateTime = new Date(startDateTime.getTime() + exam.duration * 60000);
                 const formatICSDate = (date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-
                 const description = [
                     `${t.thSubject}: ${exam.subject}`,
                     `${exam.paper}`,
@@ -543,7 +499,6 @@ METHOD:PUBLISH
                     `${t.room}: ${exam.room || t.roomPending}`,
                     t.arriveEarly
                 ].join('\\n');
-
                 let alarmBlock = '';
                 if (state.includeAlerts) {
                     alarmBlock = `BEGIN:VALARM
@@ -557,14 +512,13 @@ ACTION:DISPLAY
 DESCRIPTION:${t.reminder2h} (${exam.subject})
 END:VALARM`;
                 }
-
                 icsContent += 
 `BEGIN:VEVENT
 UID:${exam.id}-${Date.now()}@myschool.com
 DTSTAMP:${formatICSDate(new Date())}
 DTSTART:${formatICSDate(startDateTime)}
 DTEND:${formatICSDate(endDateTime)}
-SUMMARY:📝 [${exam.board}] ${exam.subject}
+SUMMARY: 📝  [${exam.board}] ${exam.subject}
 DESCRIPTION:${description}
 LOCATION:${exam.room || 'School Exam Hall'}
 STATUS:CONFIRMED
@@ -573,7 +527,6 @@ END:VEVENT
 `;
             });
             icsContent += `END:VCALENDAR`;
-
             const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement('a');
@@ -585,13 +538,11 @@ END:VEVENT
             
             showSuccess(t.successTitle, t.successDescIcs(state.includeAlerts));
         });
-
         // --- 6. 生成图片逻辑 ---
         function generateImage() {
             const myExams = getMyExams();
             if (myExams.length === 0) return;
             const t = i18n[state.lang];
-
             // 1. 填充隐藏的 Table 内容
             const imgTableBody = document.getElementById('image-table-body');
             document.getElementById('img-total-count').innerText = `${myExams.length} Exams`;
@@ -606,21 +557,18 @@ END:VEVENT
                     <td class="py-3 align-top">
                         <div class="font-bold text-gray-900 text-lg">${exam.subject}</div>
                         <div class="text-gray-600 mb-2">${exam.paper}</div>
-                        <span class="inline-block text-xs font-bold px-1.5 py-0.5 rounded ${exam.board === 'CIE' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}">
-                            ${exam.board}
-                        </span>
+                        <!-- 已移除导致遮挡的考试局高亮标签 -->
                     </td>
                     <td class="py-3 align-top">
                         <div class="flex items-start gap-1 text-gray-700">
-                            <span class="font-bold">📍 ${t.room}:</span> ${exam.room || t.roomPending}
+                            <span class="font-bold"> 📍  ${t.room}:</span> ${exam.room || t.roomPending}
                         </div>
                         <div class="text-orange-600 font-bold text-xs mt-1">
-                            ⚠️ ${t.arriveEarly}
+                             ⚠️  ${t.arriveEarly}
                         </div>
                     </td>
                 </tr>
             `).join('');
-
             // 2. 使用 html2canvas 截图
             const element = document.getElementById('image-export-container');
             
@@ -635,23 +583,19 @@ END:VEVENT
                 link.download = 'My_Exam_Schedule.png';
                 link.href = canvas.toDataURL("image/png");
                 link.click();
-
                 showSuccess(t.successTitle, t.successDescImg);
             });
         }
-
         function showSuccess(title, desc) {
             const successMsg = document.getElementById('success-message');
             document.getElementById('success-title').innerText = title;
             document.getElementById('success-desc').innerText = desc;
             successMsg.classList.remove('hidden');
         }
-
         // 初始化
         updateUIText();
         renderSections();
         updatePreview();
-
     </script>
 </body>
 </html>
