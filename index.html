@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2025 考试季日历生成器 / 2025 Exam Calendar Generator</title>
-    <!-- 引入 Tailwind CSS 进行样式设计 -->
+    <title>2026 Jan Exam Calendar / 考试日历生成器</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入 Lucide 图标库 -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- 引入 html2canvas 用于生成图片 -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
-        /* 自定义滚动条样式 */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #c7c7cc; border-radius: 4px; }
@@ -21,581 +17,576 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .print-clean {
+            background-color: white !important;
+            color: black !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
     </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800 min-h-screen py-8 px-4">
-    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-gray-200 relative">
+<body class="bg-slate-50 font-sans text-slate-800 min-h-screen py-8 px-4">
+
+    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200 relative">
         
-        <!-- 头部区域 -->
-        <div class="bg-indigo-600 p-8 text-white relative">
-            <!-- 语言切换按钮 -->
-            <button onclick="toggleLanguage()" class="absolute top-6 right-6 flex items-center gap-2 bg-indigo-700 hover:bg-indigo-800 text-xs font-bold py-1.5 px-3 rounded-full transition-colors border border-indigo-500">
+        <!-- 头部 -->
+        <div class="bg-indigo-700 p-8 text-white relative">
+            <button onclick="toggleLanguage()" class="absolute top-6 right-6 flex items-center gap-2 bg-indigo-800 hover:bg-indigo-900 text-xs font-bold py-1.5 px-3 rounded-full transition-colors border border-indigo-600">
                 <i data-lucide="languages" class="w-3 h-3"></i>
                 <span id="lang-btn-text">English</span>
             </button>
+
             <h1 class="text-3xl font-bold flex items-center gap-3">
-                <i data-lucide="calendar" class="w-8 h-8"></i>
-                <span id="header-title">2025 考试季日历生成器</span>
+                <i data-lucide="calendar-days" class="w-8 h-8"></i>
+                <span id="header-title">2026 Jan Exam Calendar</span>
             </h1>
             
-            <p id="header-subtitle" class="mt-3 text-indigo-100 max-w-2xl leading-relaxed">
-                专为 IG, AS, A-Level 同学设计。勾选你的科目，自动生成包含<b>考前提醒</b>、<b>考试局</b>及<b>考场信息</b>的专属日历。
+            <p id="header-subtitle" class="mt-3 text-indigo-100 max-w-2xl leading-relaxed text-sm">
+                Edexcel IAL 2026年1月考季专属工具。
             </p>
-            <!-- 优化后的笔记分享链接 -->
-            <div class="mt-4 p-3 bg-indigo-700/50 rounded-lg border border-indigo-500/50 flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-indigo-50">
+
+            <div class="mt-4 p-3 bg-indigo-800/50 rounded-lg border border-indigo-600/50 flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-indigo-100">
                 <span class="flex items-center gap-2">
                     <i data-lucide="book-open-check" class="w-4 h-4 text-yellow-300"></i>
-                    <span id="note-text-pre">备考复习需要助力？欢迎访问我的</span>
+                    <span id="note-text-pre">备考复习资料 / Revision Notes:</span>
                 </span>
                 <a href="https://blanchard0329.notion.site/" target="_blank" class="font-bold text-white underline decoration-yellow-400 decoration-2 underline-offset-2 hover:text-yellow-200 transition-colors flex items-center gap-1">
-                    <span id="note-link-text">个人笔记共享站</span>
+                    <span id="note-link-text">Blanchard's Notion Site</span>
                     <i data-lucide="external-link" class="w-3 h-3"></i>
                 </a>
             </div>
-            <!-- 联系方式 -->
-            <div class="mt-2 text-xs text-indigo-200 flex items-center gap-2">
+
+            <div class="mt-2 text-xs text-indigo-300 flex items-center gap-2">
                 <i data-lucide="mail" class="w-3 h-3"></i>
-                <span id="contact-text">遇到问题？联系我：</span>
+                <span>Feedback:</span>
                 <a href="mailto:Blanchard.0329@gmail.com" class="hover:text-white underline">Blanchard.0329@gmail.com</a>
             </div>
         </div>
+
         <div class="p-8">
-            <!-- 考试科目选择区域 -->
-            <div id="sections-container" class="space-y-10">
-                <!-- 内容加载中... -->
+            <!-- 冲突提示横幅 (动态显示) -->
+            <div id="clash-alert" class="hidden mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-3">
+                <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 mt-0.5 shrink-0"></i>
+                <div class="text-sm text-amber-900">
+                    <p class="font-bold">Detected Clash: Maths P2 & Economics U2</p>
+                    <p>System has automatically adjusted Economics U2 to <b>15:50</b> with a <b>Supervised Break (15:30-15:50)</b>.</p>
+                </div>
             </div>
-            <!-- 底部预览和操作区域 -->
-            <div class="mt-12 pt-8 border-t border-gray-100">
-                <div class="flex flex-col xl:flex-row items-end justify-between mb-6 gap-6">
-                    <!-- 左侧状态 -->
+
+            <!-- 科目选择区域 -->
+            <div id="sections-container" class="space-y-8">
+                <!-- JS生成 -->
+            </div>
+
+            <!-- 底部操作栏 -->
+            <div class="mt-10 pt-6 border-t border-slate-100 sticky bottom-0 bg-white/95 backdrop-blur-sm py-4 z-20">
+                <div class="flex flex-col xl:flex-row items-end justify-between gap-4">
                     <div class="flex items-center gap-3 w-full xl:w-auto">
-                        <div id="bell-icon-container" class="p-2 rounded-full transition-colors bg-indigo-100 shrink-0">
+                        <div id="bell-icon-container" class="p-2 rounded-full bg-indigo-100 shrink-0">
                             <i data-lucide="bell" class="w-6 h-6 text-indigo-600"></i>
                         </div>
                         <div>
-                            <h2 id="preview-title" class="text-lg font-bold text-gray-900">已选考试预览</h2>
-                            <p id="preview-status-text" class="text-sm text-gray-500">
-                                请选择科目...
-                            </p>
+                            <h2 id="preview-title" class="text-lg font-bold text-slate-900">Exam Preview</h2>
+                            <p id="preview-status-text" class="text-sm text-slate-500">Select subjects...</p>
                         </div>
                     </div>
                     
-                    <!-- 右侧操作 -->
                     <div class="flex flex-col sm:flex-row items-end sm:items-center gap-3 w-full xl:w-auto justify-end">
-                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-gray-600 hover:text-indigo-700 transition-colors select-none bg-white px-2 py-1 rounded border border-transparent hover:border-gray-100">
-                            <input type="checkbox" id="alert-toggle" checked class="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500 accent-indigo-600">
-                            <span id="alert-label">添加考前提醒</span>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-slate-600 hover:text-indigo-700 transition-colors bg-slate-50 px-3 py-2 rounded-lg border border-slate-200">
+                            <input type="checkbox" id="alert-toggle" checked class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500 accent-indigo-600">
+                            <span id="alert-label">Reminders (1 Day & 2 Hr)</span>
                         </label>
-                        <!-- 按钮组 -->
+
                         <div class="flex gap-2">
-                            <button id="generate-img-btn" disabled onclick="generateImage()" class="flex items-center gap-2 px-4 py-3 rounded-lg font-bold shadow-md transition-all bg-gray-200 text-gray-400 cursor-not-allowed text-sm">
+                            <button id="generate-img-btn" disabled onclick="generateImage()" class="flex items-center gap-2 px-4 py-2.5 rounded-lg font-bold shadow-sm transition-all bg-slate-100 text-slate-400 cursor-not-allowed text-sm">
                                 <i data-lucide="image" class="w-4 h-4"></i>
-                                <span id="btn-img-text">生成图片 (.png)</span>
+                                <span id="btn-img-text">Save Image</span>
                             </button>
-                            <button id="generate-btn" disabled class="flex items-center gap-2 px-4 py-3 rounded-lg font-bold shadow-md transition-all bg-gray-200 text-gray-400 cursor-not-allowed text-sm">
+
+                            <button id="generate-btn" disabled class="flex items-center gap-2 px-4 py-2.5 rounded-lg font-bold shadow-sm transition-all bg-slate-100 text-slate-400 cursor-not-allowed text-sm">
                                 <i data-lucide="download" class="w-4 h-4"></i>
-                                <span id="btn-ics-text">生成日历 (.ics)</span>
+                                <span id="btn-ics-text">Get Calendar (.ics)</span>
                             </button>
                         </div>
                     </div>
                 </div>
-                <!-- 列表预览容器 -->
-                <div id="preview-container" class="bg-white rounded-xl border border-gray-200 shadow-inner overflow-hidden max-h-[500px] overflow-y-auto hidden">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-gray-50 text-gray-500 font-medium border-b border-gray-200 sticky top-0 bg-gray-50 z-10">
-                            <tr>
-                                <th id="th-date" class="p-4">日期</th>
-                                <th id="th-time" class="p-4">时间</th>
-                                <th id="th-subject" class="p-4">科目 / 试卷</th>
-                                <th id="th-board" class="p-4 hidden sm:table-cell">考试局</th>
-                            </tr>
-                        </thead>
-                        <tbody id="preview-table-body" class="divide-y divide-gray-100">
-                            <!-- 行数据将由 JS 插入 -->
-                        </tbody>
-                    </table>
-                </div>
-                <!-- 空状态提示 -->
-                <div id="empty-state" class="text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-                    <p id="empty-text" class="text-gray-400">请在上方选择科目以预览详情</p>
-                </div>
-                <!-- 成功提示 -->
-                <div id="success-message" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 fade-in-init">
-                    <i data-lucide="check-circle-2" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
-                    <div class="text-sm text-green-800">
-                        <p id="success-title" class="font-bold">操作成功！</p>
-                        <p id="success-desc">文件已下载。</p>
-                    </div>
+            </div>
+
+            <!-- 预览表格 -->
+            <div id="preview-container" class="mt-4 bg-slate-50 rounded-xl border border-slate-200 shadow-inner overflow-hidden max-h-[500px] overflow-y-auto hidden">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-100 text-slate-500 font-medium border-b border-slate-200 sticky top-0 z-10">
+                        <tr>
+                            <th id="th-date" class="p-4">Date</th>
+                            <th id="th-time" class="p-4">Time</th>
+                            <th id="th-subject" class="p-4">Subject / Unit</th>
+                            <th id="th-location" class="p-4 hidden sm:table-cell">Venue</th>
+                        </tr>
+                    </thead>
+                    <tbody id="preview-table-body" class="divide-y divide-slate-200 bg-white">
+                        <!-- JS Insert -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="empty-state" class="mt-4 text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200">
+                <p id="empty-text" class="text-slate-400">Select subjects above to preview</p>
+            </div>
+
+            <div id="success-message" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-lg flex items-start gap-3 fade-in-init">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5"></i>
+                <div class="text-sm text-emerald-800">
+                    <p id="success-title" class="font-bold">Success!</p>
+                    <p id="success-desc">File downloaded.</p>
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="text-center mt-8 text-gray-400 text-xs">
-        <p>Supported Exam Boards: CIE & Edexcel • Exam Season 2025 • Contact: Blanchard.0329@gmail.com</p>
+    <div class="text-center mt-8 text-slate-400 text-xs">
+        <p>Edexcel IAL January 2026 Timetable • Unofficial Tool</p>
     </div>
-    <!-- 隐藏的图片生成容器 (用于 html2canvas 截图) -->
-    <div id="image-export-container" class="absolute top-0 left-0 -z-50 w-[800px] bg-white p-8" style="transform: translateX(-9999px)">
-        <div class="border-2 border-indigo-600 rounded-xl overflow-hidden">
-            <div class="bg-indigo-600 p-6 text-white flex justify-between items-center">
-                <div>
-                    <h2 class="text-3xl font-bold mb-1" id="img-header-title">2025 Exam Schedule</h2>
-                    <p class="text-indigo-200 text-sm" id="img-header-subtitle">Generated by My School Exam Calendar</p>
-                </div>
-                <div class="text-right">
-                    <div class="text-2xl font-bold" id="img-total-count">0 Exams</div>
-                </div>
+
+    <!-- 图片生成专用容器 (隐藏) -->
+    <div id="image-export-container" class="absolute top-0 left-0 -z-50 w-[900px] bg-white p-10 text-slate-900" style="transform: translateX(-9999px)">
+        <!-- 简单的黑白风格头部 -->
+        <div class="border-b-4 border-slate-800 pb-4 mb-6 flex justify-between items-end">
+            <div>
+                <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight" id="img-header-title">2026 Exam Schedule</h1>
+                <p class="text-slate-500 mt-1 font-medium" id="img-header-subtitle">Edexcel IAL January Series</p>
             </div>
-            <div class="p-6 bg-white">
-                <table class="w-full text-left">
-                    <thead class="border-b-2 border-indigo-100 text-indigo-900">
-                        <tr>
-                            <th class="pb-3 pl-2 w-1/4" id="img-th-time">Time / Date</th>
-                            <th class="pb-3 w-2/5" id="img-th-subject">Subject</th>
-                            <th class="pb-3 w-1/3" id="img-th-details">Details</th>
-                        </tr>
-                    </thead>
-                    <tbody id="image-table-body" class="divide-y divide-gray-100 text-sm">
-                        <!-- Content injected here -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="bg-gray-50 p-4 text-center text-gray-400 text-xs border-t border-gray-100">
-                Study Hard & Good Luck! • https://blanchard0329.notion.site/
+            <div class="text-right">
+                <div class="text-3xl font-bold text-slate-900" id="img-total-count">0 Exams</div>
             </div>
         </div>
+
+        <!-- 极简表格，无背景色，确保清晰 -->
+        <div class="bg-white">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b-2 border-slate-300 text-slate-500 text-sm uppercase tracking-wider">
+                        <th class="pb-2 w-1/4" id="img-th-date">Date</th>
+                        <th class="pb-2 w-1/5" id="img-th-time">Time</th>
+                        <th class="pb-2 w-1/3" id="img-th-subject">Subject</th>
+                        <th class="pb-2 w-1/5 text-right" id="img-th-venue">Venue</th>
+                    </tr>
+                </thead>
+                <tbody id="image-table-body" class="text-slate-800">
+                    <!-- JS Insert -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-slate-200 text-center text-slate-400 text-xs">
+             Good Luck! • Generated by Exam Calendar Tool
+        </div>
     </div>
-    <!-- 逻辑脚本 -->
+
     <script>
-        // --- 1. 多语言配置 ---
+        // --- 1. 数据配置 (2026 Jan Edexcel IAL) ---
+        // 关键：Math P2 (WMA12) 和 Econ U2 (WEC12) 都在 Jan 13。
+        // 标准时间: Econ U2 14:00-15:45 (E1406)
+        // 冲突时间: Econ U2 15:50-17:35 (E1405) + Break 15:30-15:50
+        
+        // category 字段说明：'AS' 或 'A2'
+        // 新增 shortTitle 和 fullTitle
+        const RAW_EXAM_DATA = [
+            // --- AS Level ---
+            { id: 'WMA11', shortTitle: 'Math P1', fullTitle: 'Pure Mathematics 1', date: '2026-01-08', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },
+            { id: 'WMA12', shortTitle: 'Math P2', fullTitle: 'Pure Mathematics 2', date: '2026-01-13', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' }, // Conflict Source A
+            { id: 'WST01', shortTitle: 'Math S1', fullTitle: 'Statistics 1', date: '2026-01-14', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },
+            { id: 'WFM01', shortTitle: 'Math FP1', fullTitle: 'Further Pure Mathematics 1', date: '2026-01-12', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },           
+            { id: 'WFM02', shortTitle: 'Math FP2', fullTitle: 'Further Pure Mathematics 2', date: '2026-01-16', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },
+            { id: 'WST02', shortTitle: 'Math S2', fullTitle: 'Statistics 2', date: '2026-01-20', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },
+            { id: 'WEC11', shortTitle: 'Economics U1', fullTitle: 'Markets In Action', date: '2026-01-09', start: '17:00', end: '18:45', arrive: '16:40', room: 'E1406', duration: 105, category: 'AS' },
+            { id: 'WBS12', shortTitle: 'Business U2', fullTitle: 'Managing Business Activities', date: '2026-01-12', start: '14:00', end: '16:00', arrive: '13:40', room: 'E1406', duration: 120, category: 'AS' },
+            { id: 'WEC12', shortTitle: 'Economics U2', fullTitle: 'Macroeconomic Performance and Policy', date: '2026-01-13', start: '14:00', end: '15:45', arrive: '13:40', room: 'E1406', duration: 105, category: 'AS' }, // Conflict Source B
+            { id: 'WAC12', shortTitle: 'Accounting U2', fullTitle: 'Corporate and Management Accounting', date: '2026-01-22', start: '14:00', end: '17:00', arrive: '13:40', room: 'E1406', duration: 180, category: 'AS' },
+
+            // --- A2 Level ---
+            { id: 'WMA13', shortTitle: 'Math P3', fullTitle: 'Pure Mathematics 3', date: '2026-01-19', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
+            { id: 'WMA14', shortTitle: 'Math P4', fullTitle: 'Pure Mathematics 4', date: '2026-01-22', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
+            { id: 'WME01', shortTitle: 'Math M1', fullTitle: 'Mechanics 1', date: '2026-01-09', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' }, 
+            { id: 'WDM11', shortTitle: 'Math D1', fullTitle: 'Decision Mathematics 1', date: '2026-01-20', start: '17:00', end: '18:30', arrive: '16:40', room: 'E1406', duration: 90, category: 'A2' },
+            { id: 'WME02', shortTitle: 'Math M2', fullTitle: 'Mechanics 2', date: '2026-01-15', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
+            { id: 'WME03', shortTitle: 'Math M3', fullTitle: 'Mechanics 3', date: '2026-01-21', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
+            { id: 'WFM03', shortTitle: 'Math FP3', fullTitle: 'Further Pure Mathematics 3', date: '2026-01-23', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
+            { id: 'WEC13', shortTitle: 'Economics U3', fullTitle: 'Business Behaviour', date: '2026-01-16', start: '14:00', end: '16:00', arrive: '13:40', room: 'E1406', duration: 120, category: 'A2' },
+            { id: 'WB114', shortTitle: 'Biology U4', fullTitle: 'Energy, Environment, Microbiology', date: '2026-01-08', start: '14:00', end: '15:45', arrive: '13:40', room: 'E1406', duration: 105, category: 'A2' },
+            { id: 'WPH14', shortTitle: 'Physics U4', fullTitle: 'Further Mechanics, Fields and Particles', date: '2026-01-12', start: '14:00', end: '15:45', arrive: '13:40', room: 'E1406', duration: 105, category: 'A2' }
+        ];
+
+        const SECTIONS = [
+            { key: 'AS', title: 'AS Level (Year 11)', icon: 'layers' },
+            { key: 'A2', title: 'A2 Level (Year 12)', icon: 'graduation-cap' }
+        ];
+
+        // --- 2. 多语言 ---
         const i18n = {
             zh: {
                 btnLang: "Switch to English",
-                title: "2025 考试季日历生成器",
-                subtitle: "专为 IG, AS, A-Level 同学设计。勾选你的科目，自动生成包含<b>考前提醒</b>、<b>考试局</b>及<b>考场信息</b>的专属日历。",
-                noteTextPre: "备考复习需要助力？欢迎访问我的",
-                noteLinkText: "个人笔记共享站",
-                contactText: "遇到问题？联系我：",
+                title: "2026 1月 考试日历生成器",
+                subtitle: "Edexcel IAL 2026年1月考季专属工具。",
+                noteTextPre: "备考复习资料 / Revision Notes:",
+                noteLinkText: "Blanchard's Notion Site",
                 previewTitle: "已选考试预览",
                 emptyText: "请在上方选择科目以预览详情",
-                alertLabel: "添加考前提醒",
+                alertLabel: "添加考前提醒 (1天前 & 2小时前)",
                 btnImg: "生成图片 (.png)",
                 btnIcs: "生成日历 (.ics)",
                 thDate: "日期",
                 thTime: "时间",
-                thSubject: "科目 / 试卷",
-                thBoard: "考试局",
-                statusSelected: (count, alerts) => `共 ${count} 场考试 • ${alerts ? '已开启自动提醒 (1天前 & 2小时前)' : '自动提醒已关闭'}`,
+                thSubject: "科目 / 单元",
+                thVenue: "考场",
+                arriveAt: "到达时间",
+                startAt: "开始",
+                clashAlertTitle: "检测到考试冲突: Maths P2 & Economics U2",
+                clashAlertDesc: "系统已自动将 Economics U2 调整至 <b>15:50</b>，并添加了 <b>隔离休息时间 (15:30-15:50)</b>。",
+                supervisedBreak: "⚠️ 隔离休息 Supervised Break",
+                breakTime: "15:30 - 15:50",
+                imgTitle: "2026 考试时间表",
+                imgSubtitle: "Edexcel IAL 1月考季",
+                successTitle: "操作成功！",
+                successDesc: "文件已下载。",
                 statusEmpty: "请选择科目...",
-                successTitle: "文件下载成功！",
-                successDescIcs: (alerts) => alerts ? "请在手机或电脑上打开该文件。导入后包含：开考前 1 天及开考前 2 小时的自动提醒。" : "文件已生成。直接导入即可查看时间表。",
-                successDescImg: "图片已保存到你的设备。",
-                arriveEarly: "请提前15分钟到达",
-                room: "考场",
-                roomPending: "待定",
-                reminder1d: "考试就在明天！",
-                reminder2h: "考试还有2小时，快去准备！",
-                gradeIG: "IGCSE",
-                gradeAS: "AS Level",
-                gradeAL: "A Level",
-                imgHeader: "2025 考试时刻表",
-                imgSubHeader: "祝考试顺利！",
-                imgThTime: "时间 / 日期",
-                imgThSubject: "科目",
-                imgThDetails: "考场 / 备注"
+                statusSelected: (n) => `共 ${n} 场考试`
             },
             en: {
                 btnLang: "切换为中文",
-                title: "2025 Exam Calendar Generator",
-                subtitle: "Designed for IG, AS, A-Level students. Select your subjects to generate a calendar with <b>reminders</b>, <b>exam boards</b>, and <b>venue info</b>.",
-                noteTextPre: "Need revision materials? Visit my",
-                noteLinkText: "Note Sharing Space",
-                contactText: "Questions? Contact me:",
+                title: "2026 Jan Exam Calendar Generator",
+                subtitle: "Tool for Edexcel IAL Jan 2026 series.",
+                noteTextPre: "Revision Notes:",
+                noteLinkText: "Blanchard's Notion Site",
                 previewTitle: "Exam Preview",
                 emptyText: "Select subjects above to preview",
-                alertLabel: "Add Reminders",
+                alertLabel: "Reminders (1 Day & 2 Hr)",
                 btnImg: "Save Image (.png)",
-                btnIcs: "Download (.ics)",
+                btnIcs: "Get Calendar (.ics)",
                 thDate: "Date",
                 thTime: "Time",
-                thSubject: "Subject / Paper",
-                thBoard: "Board",
-                statusSelected: (count, alerts) => `${count} Exams Selected • ${alerts ? 'Alerts On (1 day & 2h before)' : 'Alerts Off'}`,
+                thSubject: "Subject / Unit",
+                thVenue: "Venue",
+                arriveAt: "Arrive",
+                startAt: "Start",
+                clashAlertTitle: "Clash Detected: Maths P2 & Economics U2",
+                clashAlertDesc: "System automatically adjusted Economics U2 to <b>15:50</b> with a <b>Supervised Break (15:30-15:50)</b>.",
+                supervisedBreak: "⚠️ Supervised Break",
+                breakTime: "15:30 - 15:50",
+                imgTitle: "2026 Exam Schedule",
+                imgSubtitle: "Edexcel IAL Jan Series",
+                successTitle: "Success!",
+                successDesc: "File downloaded.",
                 statusEmpty: "Select subjects...",
-                successTitle: "Download Successful!",
-                successDescIcs: (alerts) => alerts ? "Import this file to your calendar app. Includes reminders 1 day & 2 hours before each exam." : "File generated. Import to view your schedule.",
-                successDescImg: "Image saved to your device.",
-                arriveEarly: "Arrive 15 mins early",
-                room: "Room",
-                roomPending: "TBA",
-                reminder1d: "Exam is tomorrow!",
-                reminder2h: "Exam in 2 hours. Go to prep room!",
-                gradeIG: "IGCSE",
-                gradeAS: "AS Level",
-                gradeAL: "A Level",
-                imgHeader: "2025 Exam Schedule",
-                imgSubHeader: "Good Luck!",
-                imgThTime: "Time / Date",
-                imgThSubject: "Subject",
-                imgThDetails: "Venue / Notes"
+                statusSelected: (n) => `${n} Exams Selected`
             }
         };
-        // --- 2. 数据源配置 ---
-        const EXAM_DATA = [
-            // --- IGCSE ---
-            { id: 'ig_math_p2', grade: 'IGCSE', board: 'CIE', subject: 'Maths (0580)', paper: 'Paper 2 (Extended)', date: '2025-05-02', time: '09:00', duration: 90 },
-            { id: 'ig_math_p4', grade: 'IGCSE', board: 'CIE', subject: 'Maths (0580)', paper: 'Paper 4 (Extended)', date: '2025-05-05', time: '13:00', duration: 150 },
-            { id: 'ig_phy_p4', grade: 'IGCSE', board: 'CIE', subject: 'Physics (0625)', paper: 'Theory', date: '2025-05-12', time: '09:00', duration: 75 },
-            
-            // --- AS Level ---
-            { id: 'as_econ_p1', grade: 'AS', board: 'CIE', subject: 'Economics (9708)', paper: 'Multiple Choice', date: '2025-06-10', time: '13:00', duration: 60 },
-            { id: 'as_econ_p2', grade: 'AS', board: 'CIE', subject: 'Economics (9708)', paper: 'Data Response', date: '2025-05-12', time: '09:00', duration: 90 },
-            { id: 'as_math_pure', grade: 'AS', board: 'Edexcel', subject: 'Maths (Pure)', paper: 'Pure 1', date: '2025-05-15', time: '09:00', duration: 120 },
-            
-            // --- A Level ---
-            { id: 'al_psy_p3', grade: 'ALevel', board: 'CIE', subject: 'Psychology (9990)', paper: 'Specialist Options', date: '2025-05-20', time: '09:00', duration: 90 },
-            { id: 'al_chem_p4', grade: 'ALevel', board: 'CIE', subject: 'Chemistry (9701)', paper: 'Structured Questions', date: '2025-05-22', time: '13:00', duration: 120 },
-            { id: 'al_math_stat', grade: 'ALevel', board: 'Edexcel', subject: 'Maths (Stats)', paper: 'Statistics 2', date: '2025-06-01', time: '09:00', duration: 90 },
-        ];
-        const GRADE_SECTIONS = [
-            { key: 'IGCSE', title: 'IGCSE', icon: 'book-open' },
-            { key: 'AS', title: 'AS Level', icon: 'layers' },
-            { key: 'ALevel', title: 'A Level', icon: 'graduation-cap' },
-        ];
-        // --- 3. 状态管理 ---
+
+        // --- 3. 核心逻辑 ---
         let state = {
-            selectedSubjects: new Set(),
+            selectedIds: new Set(),
             includeAlerts: true,
-            lang: 'zh' // 默认为中文
+            lang: 'zh'
         };
-        // --- 4. 辅助逻辑 ---
-        // 切换语言
+
         function toggleLanguage() {
             state.lang = state.lang === 'zh' ? 'en' : 'zh';
-            updateUIText();
-            renderSections(); // 重新渲染列表以更新年级标题（如果有需要）
-            updatePreview();  // 更新预览表头的语言
+            updateUI();
         }
-        // 更新界面所有静态文本
-        function updateUIText() {
+
+        function toggleExam(id, btn) {
+            if (state.selectedIds.has(id)) {
+                state.selectedIds.delete(id);
+            } else {
+                state.selectedIds.add(id);
+            }
+            document.getElementById('success-message').classList.add('hidden');
+            renderButtons(); // 刷新按钮状态
+            updatePreview(); // 刷新预览表
+        }
+
+        // 处理冲突逻辑
+        function getProcessedExams() {
+            // 1. 获取所有选中的考试
+            let exams = RAW_EXAM_DATA.filter(e => state.selectedIds.has(e.id)).map(e => ({...e})); // 深拷贝避免修改原数据
+
+            // 2. 检测冲突: WMA12 (Math P2) 和 WEC12 (Econ U2)
+            const hasMathP2 = state.selectedIds.has('WMA12');
+            const hasEconU2 = state.selectedIds.has('WEC12');
+            const clashAlert = document.getElementById('clash-alert');
+            const t = i18n[state.lang];
+
+            if (hasMathP2 && hasEconU2) {
+                clashAlert.classList.remove('hidden');
+                clashAlert.querySelector('p.font-bold').innerText = t.clashAlertTitle;
+                clashAlert.querySelector('div p:last-child').innerHTML = t.clashAlertDesc;
+
+                // 找到 Econ U2 并修改
+                const econExam = exams.find(e => e.id === 'WEC12');
+                if (econExam) {
+                    econExam.start = '15:50';
+                    econExam.end = '17:35';
+                    econExam.room = 'E1405';
+                    econExam.isClashAdjusted = true;
+                    econExam.note = t.supervisedBreak + " (15:30-15:50)";
+                }
+            } else {
+                clashAlert.classList.add('hidden');
+            }
+
+            // 3. 排序
+            return exams.sort((a, b) => new Date(a.date + 'T' + a.start) - new Date(b.date + 'T' + b.start));
+        }
+
+        function renderButtons() {
+            const container = document.getElementById('sections-container');
+            if (container.children.length === 0) {
+                container.innerHTML = '';
+                SECTIONS.forEach(section => {
+                    const sectionExams = RAW_EXAM_DATA.filter(e => e.category === section.key);
+                    
+                    const secDiv = document.createElement('div');
+                    secDiv.className = 'fade-in-init';
+                    secDiv.innerHTML = `
+                        <h3 class="text-lg font-bold text-slate-700 flex items-center gap-2 mb-3 border-b border-slate-100 pb-2">
+                            <i data-lucide="${section.icon}" class="w-5 h-5 text-indigo-500"></i>
+                            ${section.title}
+                        </h3>
+                    `;
+                    
+                    const grid = document.createElement('div');
+                    grid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3';
+                    
+                    sectionExams.forEach(exam => {
+                        const btn = document.createElement('button');
+                        btn.id = `btn-${exam.id}`;
+                        btn.onclick = () => toggleExam(exam.id, btn);
+                        grid.appendChild(btn);
+                    });
+                    
+                    secDiv.appendChild(grid);
+                    container.appendChild(secDiv);
+                });
+            }
+
+            // 更新按钮状态
+            RAW_EXAM_DATA.forEach(exam => {
+                const btn = document.getElementById(`btn-${exam.id}`);
+                if (!btn) return;
+                
+                const isSelected = state.selectedIds.has(exam.id);
+                btn.className = `
+                    text-left p-3 rounded-xl border transition-all duration-200 group relative flex flex-col justify-between
+                    ${isSelected 
+                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-md' 
+                        : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:shadow-sm'}
+                `;
+                
+                // 按钮内容结构更新：
+                // 1. ID (Top)
+                // 2. Short Title (Middle, Large)
+                // 3. Full Title (Middle, Small)
+                // 4. Date (Bottom)
+                btn.innerHTML = `
+                    <div>
+                        <div class="text-[10px] font-bold opacity-60 mb-1 uppercase tracking-wider">${exam.id}</div>
+                        <div class="font-bold text-lg leading-tight mb-0.5">${exam.shortTitle}</div>
+                        <div class="text-[11px] leading-tight opacity-80 mb-2 font-medium">${exam.fullTitle}</div>
+                    </div>
+                    <div class="text-xs flex items-center gap-1 opacity-90 mt-auto pt-2 border-t border-white/10">
+                        <i data-lucide="calendar" class="w-3 h-3"></i>
+                        <span>${exam.date.slice(5)}</span>
+                    </div>
+                    ${isSelected ? '<div class="absolute top-2 right-2"><i data-lucide="check-circle" class="w-4 h-4"></i></div>' : ''}
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function updatePreview() {
+            const exams = getProcessedExams();
+            const tbody = document.getElementById('preview-table-body');
+            const emptyState = document.getElementById('empty-state');
+            const previewContainer = document.getElementById('preview-container');
+            const genBtn = document.getElementById('generate-btn');
+            const imgBtn = document.getElementById('generate-img-btn');
+            const t = i18n[state.lang];
+
+            document.getElementById('preview-status-text').innerText = 
+                exams.length > 0 ? t.statusSelected(exams.length) : t.statusEmpty;
+
+            if (exams.length === 0) {
+                emptyState.classList.remove('hidden');
+                previewContainer.classList.add('hidden');
+                genBtn.disabled = true;
+                imgBtn.disabled = true;
+                genBtn.classList.add('bg-slate-100', 'text-slate-400', 'cursor-not-allowed');
+                genBtn.classList.remove('bg-indigo-600', 'text-white', 'hover:bg-indigo-700');
+                imgBtn.classList.add('bg-slate-100', 'text-slate-400', 'cursor-not-allowed');
+                imgBtn.classList.remove('bg-emerald-600', 'text-white', 'hover:bg-emerald-700');
+            } else {
+                emptyState.classList.add('hidden');
+                previewContainer.classList.remove('hidden');
+                genBtn.disabled = false;
+                imgBtn.disabled = false;
+                
+                genBtn.classList.remove('bg-slate-100', 'text-slate-400', 'cursor-not-allowed');
+                genBtn.classList.add('bg-indigo-600', 'text-white', 'hover:bg-indigo-700');
+                
+                imgBtn.classList.remove('bg-slate-100', 'text-slate-400', 'cursor-not-allowed');
+                imgBtn.classList.add('bg-emerald-600', 'text-white', 'hover:bg-emerald-700');
+
+                tbody.innerHTML = exams.map(e => `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 font-medium text-slate-900 whitespace-nowrap">${e.date}</td>
+                        <td class="p-4 text-slate-700 whitespace-nowrap">
+                            <div class="font-bold">${e.start} - ${e.end}</div>
+                            <div class="text-xs text-slate-500 mt-0.5">${t.arriveAt}: ${e.arrive}</div>
+                        </td>
+                        <td class="p-4">
+                            <div class="font-bold text-indigo-900 text-base">${e.shortTitle}</div>
+                            <div class="text-xs text-slate-500">${e.fullTitle}</div>
+                            ${e.isClashAdjusted ? `<div class="text-xs text-amber-600 font-bold mt-1 bg-amber-50 inline-block px-1 rounded">${t.supervisedBreak} ${t.breakTime}</div>` : ''}
+                        </td>
+                        <td class="p-4 hidden sm:table-cell text-slate-600 font-mono text-sm">${e.room}</td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        function updateUI() {
             const t = i18n[state.lang];
             document.getElementById('lang-btn-text').innerText = t.btnLang;
             document.getElementById('header-title').innerText = t.title;
             document.getElementById('header-subtitle').innerHTML = t.subtitle;
             document.getElementById('note-text-pre').innerText = t.noteTextPre;
             document.getElementById('note-link-text').innerText = t.noteLinkText;
-            document.getElementById('contact-text').innerText = t.contactText;
             document.getElementById('preview-title').innerText = t.previewTitle;
             document.getElementById('empty-text').innerText = t.emptyText;
             document.getElementById('alert-label').innerText = t.alertLabel;
             document.getElementById('btn-img-text').innerText = t.btnImg;
             document.getElementById('btn-ics-text').innerText = t.btnIcs;
+            
             document.getElementById('th-date').innerText = t.thDate;
             document.getElementById('th-time').innerText = t.thTime;
             document.getElementById('th-subject').innerText = t.thSubject;
-            document.getElementById('th-board').innerText = t.thBoard;
-            
-            // 更新图片生成模版的表头
-            document.getElementById('img-header-title').innerText = t.imgHeader;
-            document.getElementById('img-header-subtitle').innerText = t.imgSubHeader;
-            document.getElementById('img-th-time').innerText = t.imgThTime;
-            document.getElementById('img-th-subject').innerText = t.imgThSubject;
-            document.getElementById('img-th-details').innerText = t.imgThDetails;
-        }
-        function getSubjectsByGrade() {
-            const grouped = {};
-            GRADE_SECTIONS.forEach(section => {
-                const examsInGrade = EXAM_DATA.filter(e => e.grade === section.key);
-                const unique = [];
-                const seen = new Set();
-                
-                examsInGrade.forEach(exam => {
-                    const uniqueKey = `${exam.subject}|${exam.board}`;
-                    if (!seen.has(uniqueKey)) {
-                        seen.add(uniqueKey);
-                        unique.push({
-                            name: exam.subject,
-                            board: exam.board,
-                            fullKey: uniqueKey
-                        });
-                    }
-                });
-                grouped[section.key] = unique;
-            });
-            return grouped;
-        }
-        const subjectsByGrade = getSubjectsByGrade();
-        // 渲染选择区域
-        function renderSections() {
-            const container = document.getElementById('sections-container');
-            container.innerHTML = '';
-            const t = i18n[state.lang];
-            GRADE_SECTIONS.forEach(section => {
-                const subjects = subjectsByGrade[section.key];
-                if (!subjects || subjects.length === 0) return;
-                // 动态获取年级标题
-                let gradeTitle = section.title; 
-                // 如果需要对标题也进行翻译，可以在 i18n 里做映射，目前保留原样或简单映射
-                if (section.key === 'IGCSE') gradeTitle = t.gradeIG;
-                if (section.key === 'AS') gradeTitle = t.gradeAS;
-                if (section.key === 'ALevel') gradeTitle = t.gradeAL;
-                const sectionDiv = document.createElement('div');
-                sectionDiv.className = 'fade-in-init'; 
-                
-                sectionDiv.innerHTML = `
-                    <h2 class="text-xl font-bold flex items-center gap-2 mb-4 text-gray-800 border-b border-gray-100 pb-2">
-                        <span class="p-2 bg-indigo-50 text-indigo-600 rounded-lg">
-                            <i data-lucide="${section.icon}" class="w-5 h-5"></i>
-                        </span>
-                        ${gradeTitle}
-                    </h2>
-                `;
-                const gridDiv = document.createElement('div');
-                gridDiv.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3';
-                subjects.forEach(sub => {
-                    const isSelected = state.selectedSubjects.has(sub.fullKey);
-                    const btn = document.createElement('button');
-                    btn.onclick = (e) => toggleSubject(sub.fullKey, sub, e.currentTarget);
-                    updateButtonVisual(btn, sub, isSelected);
-                    gridDiv.appendChild(btn);
-                });
-                sectionDiv.appendChild(gridDiv);
-                container.appendChild(sectionDiv);
-            });
-            lucide.createIcons();
-        }
-        function updateButtonVisual(btn, sub, isSelected) {
-            btn.className = `
-                relative flex flex-col items-start p-3 rounded-xl border-2 transition-all duration-200 text-left w-full
-                ${isSelected 
-                    ? 'border-indigo-500 bg-indigo-50/50 shadow-sm' 
-                    : 'border-gray-100 hover:border-indigo-200 hover:bg-gray-50'}
-            `;
-            const badgeColor = sub.board === 'CIE' ? 'bg-orange-500' : 'bg-blue-500';
-            btn.innerHTML = `
-                <div class="flex justify-between w-full items-start mb-1">
-                    <span class="text-xs font-bold px-2 py-0.5 rounded text-white ${badgeColor}">
-                        ${sub.board}
-                    </span>
-                    ${isSelected ? '<i data-lucide="check" class="w-5 h-5 text-indigo-600"></i>' : ''}
-                </div>
-                <span class="font-semibold ${isSelected ? 'text-indigo-900' : 'text-gray-700'}">
-                    ${sub.name}
-                </span>
-            `;
-        }
-        function toggleSubject(key, subData, btnElement) {
-            if (state.selectedSubjects.has(key)) {
-                state.selectedSubjects.delete(key);
-            } else {
-                state.selectedSubjects.add(key);
-            }
-            document.getElementById('success-message').classList.add('hidden');
-            const isSelected = state.selectedSubjects.has(key);
-            updateButtonVisual(btnElement, subData, isSelected);
-            lucide.createIcons();
+            document.getElementById('th-location').innerText = t.thVenue;
+
+            document.getElementById('img-header-title').innerText = t.imgTitle;
+            document.getElementById('img-header-subtitle').innerText = t.imgSubtitle;
+            document.getElementById('img-th-date').innerText = t.thDate;
+            document.getElementById('img-th-time').innerText = t.thTime;
+            document.getElementById('img-th-subject').innerText = t.thSubject;
+            document.getElementById('img-th-venue').innerText = t.thVenue;
+
             updatePreview();
         }
-        document.getElementById('alert-toggle').addEventListener('change', (e) => {
-            state.includeAlerts = e.target.checked;
-            updatePreviewUIStatus();
-            document.getElementById('success-message').classList.add('hidden');
-        });
-        function getMyExams() {
-            return EXAM_DATA.filter(exam => {
-                const key = `${exam.subject}|${exam.board}`;
-                return state.selectedSubjects.has(key);
-            }).sort((a, b) => new Date(`${a.date}T${a.time}`) - new Date(`${b.date}T${b.time}`));
-        }
-        function updatePreviewUIStatus() {
-            const myExams = getMyExams();
-            const statusText = document.getElementById('preview-status-text');
-            const bellContainer = document.getElementById('bell-icon-container');
+
+        // --- 生成 ICS ---
+        document.getElementById('generate-btn').onclick = () => {
+            const exams = getProcessedExams();
+            if (exams.length === 0) return;
             const t = i18n[state.lang];
-            if (myExams.length === 0) {
-                statusText.innerText = t.statusEmpty;
-            } else {
-                statusText.innerText = t.statusSelected(myExams.length, state.includeAlerts);
-            }
-            if (state.includeAlerts) {
-                bellContainer.className = "p-2 rounded-full transition-colors bg-indigo-100 shrink-0";
-                bellContainer.innerHTML = '<i data-lucide="bell" class="w-6 h-6 text-indigo-600"></i>';
-            } else {
-                bellContainer.className = "p-2 rounded-full transition-colors bg-gray-100 shrink-0";
-                bellContainer.innerHTML = '<i data-lucide="bell-off" class="w-6 h-6 text-gray-400"></i>';
-            }
-            lucide.createIcons();
-        }
-        function updatePreview() {
-            const myExams = getMyExams();
-            const tableBody = document.getElementById('preview-table-body');
-            const emptyState = document.getElementById('empty-state');
-            const previewContainer = document.getElementById('preview-container');
-            const generateBtn = document.getElementById('generate-btn');
-            const generateImgBtn = document.getElementById('generate-img-btn');
-            const t = i18n[state.lang];
-            updatePreviewUIStatus();
-            if (myExams.length === 0) {
-                emptyState.classList.remove('hidden');
-                previewContainer.classList.add('hidden');
-                generateBtn.disabled = true;
-                generateImgBtn.disabled = true;
-                const disabledClass = "flex items-center gap-2 px-4 py-3 rounded-lg font-bold shadow-md transition-all bg-gray-200 text-gray-400 cursor-not-allowed text-sm";
-                generateBtn.className = disabledClass;
-                generateImgBtn.className = disabledClass;
-                return;
-            }
-            emptyState.classList.add('hidden');
-            previewContainer.classList.remove('hidden');
-            
-            const activeClass = "flex items-center gap-2 px-4 py-3 rounded-lg font-bold shadow-md transition-all bg-indigo-600 hover:bg-indigo-700 text-white hover:scale-105 active:scale-95 cursor-pointer text-sm";
-            const activeImgClass = "flex items-center gap-2 px-4 py-3 rounded-lg font-bold shadow-md transition-all bg-emerald-600 hover:bg-emerald-700 text-white hover:scale-105 active:scale-95 cursor-pointer text-sm";
-            
-            generateBtn.disabled = false;
-            generateBtn.className = activeClass;
-            
-            generateImgBtn.disabled = false;
-            generateImgBtn.className = activeImgClass;
-            tableBody.innerHTML = myExams.map(exam => `
-                <tr class="hover:bg-indigo-50/30 transition-colors">
-                    <td class="p-4 whitespace-nowrap font-medium text-gray-900">${exam.date}</td>
-                    <td class="p-4 whitespace-nowrap text-gray-600">
-                        ${exam.time} <span class="text-xs text-gray-400">(${exam.duration}m)</span>
-                    </td>
-                    <td class="p-4">
-                        <div class="font-bold text-indigo-900">${exam.subject}</div>
-                        <div class="text-gray-500">${exam.paper}</div>
-                        <div class="text-xs text-orange-600 mt-1 font-medium">${t.arriveEarly}</div>
-                    </td>
-                    <td class="p-4 hidden sm:table-cell">
-                        <span class="text-xs font-bold px-2 py-1 rounded ${exam.board === 'CIE' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}">
-                            ${exam.board}
-                        </span>
-                    </td>
-                </tr>
-            `).join('');
-        }
-        // --- 5. 生成 ICS 逻辑 ---
-        document.getElementById('generate-btn').addEventListener('click', () => {
-            const myExams = getMyExams();
-            if (myExams.length === 0) return;
-            const t = i18n[state.lang];
-            let icsContent = 
-`BEGIN:VCALENDAR
+            const useAlerts = document.getElementById('alert-toggle').checked;
+
+            let ics = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//MySchool//ExamSchedule//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
 `;
-            myExams.forEach(exam => {
-                const startDateTime = new Date(`${exam.date}T${exam.time}`);
-                const endDateTime = new Date(startDateTime.getTime() + exam.duration * 60000);
-                const formatICSDate = (date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-                const description = [
-                    `${t.thSubject}: ${exam.subject}`,
-                    `${exam.paper}`,
-                    `${t.thTime}: ${exam.duration} min`,
-                    `${t.thBoard}: ${exam.board}`,
-                    `${t.room}: ${exam.room || t.roomPending}`,
-                    t.arriveEarly
-                ].join('\\n');
-                let alarmBlock = '';
-                if (state.includeAlerts) {
-                    alarmBlock = `BEGIN:VALARM
+            exams.forEach(e => {
+                const startStr = e.date.replace(/-/g, '') + 'T' + e.start.replace(':', '') + '00';
+                const endStr = e.date.replace(/-/g, '') + 'T' + e.end.replace(':', '') + '00';
+                const nowStr = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+                let desc = `Subject: ${e.shortTitle}\\nFull Name: ${e.fullTitle}\\nRoom: ${e.room}\\nArrive: ${e.arrive}`;
+                if (e.isClashAdjusted) desc += `\\nNote: ${t.supervisedBreak} ${t.breakTime}`;
+
+                let alarms = '';
+                if (useAlerts) {
+                    alarms = `BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:${t.reminder1d} (${exam.subject})
+DESCRIPTION:Exam Tomorrow: ${e.shortTitle}
 END:VALARM
 BEGIN:VALARM
 TRIGGER:-PT2H
 ACTION:DISPLAY
-DESCRIPTION:${t.reminder2h} (${exam.subject})
+DESCRIPTION:Exam in 2h: ${e.shortTitle}
 END:VALARM`;
                 }
-                icsContent += 
-`BEGIN:VEVENT
-UID:${exam.id}-${Date.now()}@myschool.com
-DTSTAMP:${formatICSDate(new Date())}
-DTSTART:${formatICSDate(startDateTime)}
-DTEND:${formatICSDate(endDateTime)}
-SUMMARY: 📝  [${exam.board}] ${exam.subject}
-DESCRIPTION:${description}
-LOCATION:${exam.room || 'School Exam Hall'}
-STATUS:CONFIRMED
-${alarmBlock}
+
+                ics += `BEGIN:VEVENT
+UID:${e.id}-${Date.now()}@myschool.com
+DTSTAMP:${nowStr}
+DTSTART:${startStr}
+DTEND:${endStr}
+SUMMARY:📝 ${e.shortTitle}
+DESCRIPTION:${desc}
+LOCATION:${e.room}
+${alarms}
 END:VEVENT
 `;
             });
-            icsContent += `END:VCALENDAR`;
-            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-            const url = window.URL.createObjectURL(blob);
+            ics += `END:VCALENDAR`;
+
+            const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
             const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'My_Exam_Schedule_2025.ics');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'Exam_Schedule_2026.ics';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            
-            showSuccess(t.successTitle, t.successDescIcs(state.includeAlerts));
-        });
-        // --- 6. 生成图片逻辑 ---
-        function generateImage() {
-            const myExams = getMyExams();
-            if (myExams.length === 0) return;
+
+            document.getElementById('success-message').classList.remove('hidden');
+        };
+
+        // --- 生成图片 ---
+        window.generateImage = () => {
+            const exams = getProcessedExams();
+            if (exams.length === 0) return;
             const t = i18n[state.lang];
-            // 1. 填充隐藏的 Table 内容
-            const imgTableBody = document.getElementById('image-table-body');
-            document.getElementById('img-total-count').innerText = `${myExams.length} Exams`;
-            
-            imgTableBody.innerHTML = myExams.map(exam => `
-                <tr>
-                    <td class="py-3 pl-2 align-top">
-                        <div class="font-bold text-indigo-900 text-lg">${exam.date}</div>
-                        <div class="text-indigo-600 font-medium">${exam.time}</div>
-                        <div class="text-gray-400 text-xs mt-1">${exam.duration} mins</div>
+
+            const tbody = document.getElementById('image-table-body');
+            document.getElementById('img-total-count').innerText = `${exams.length} Exams`;
+
+            tbody.innerHTML = exams.map(e => `
+                <tr class="border-b border-slate-100 last:border-0">
+                    <td class="py-4 font-bold text-slate-800 align-top">${e.date}</td>
+                    <td class="py-4 align-top">
+                        <div class="text-lg font-bold text-slate-900">${e.start}</div>
+                        <div class="text-xs text-slate-500 mt-1 uppercase tracking-wide">Arrive ${e.arrive}</div>
                     </td>
-                    <td class="py-3 align-top">
-                        <div class="font-bold text-gray-900 text-lg">${exam.subject}</div>
-                        <div class="text-gray-600 mb-2">${exam.paper}</div>
-                        <!-- 已移除导致遮挡的考试局高亮标签 -->
+                    <td class="py-4 align-top">
+                        <div class="font-bold text-lg text-slate-900">${e.shortTitle}</div>
+                        <div class="text-slate-600 text-sm mt-0.5">${e.fullTitle}</div>
+                        ${e.isClashAdjusted ? `<div class="mt-2 text-xs border border-slate-800 text-slate-800 px-2 py-1 inline-block font-bold">SUPERVISED BREAK 15:30-15:50</div>` : ''}
                     </td>
-                    <td class="py-3 align-top">
-                        <div class="flex items-start gap-1 text-gray-700">
-                            <span class="font-bold"> 📍  ${t.room}:</span> ${exam.room || t.roomPending}
-                        </div>
-                        <div class="text-orange-600 font-bold text-xs mt-1">
-                             ⚠️  ${t.arriveEarly}
-                        </div>
+                    <td class="py-4 text-right align-top font-mono text-slate-600 font-bold text-lg">
+                        ${e.room}
                     </td>
                 </tr>
             `).join('');
-            // 2. 使用 html2canvas 截图
-            const element = document.getElementById('image-export-container');
+
+            const el = document.getElementById('image-export-container');
             
-            // 临时让它可见但透明，以确保渲染正确（虽然 absolute -9999px 通常也工作）
-            // 这里 html2canvas 可以处理 hidden 或 off-screen 元素
-            html2canvas(element, {
-                scale: 2, // 提高清晰度
-                backgroundColor: null,
+            html2canvas(el, {
+                scale: 2,
+                backgroundColor: '#ffffff', // 强制白底
+                useCORS: true
             }).then(canvas => {
-                // 下载图片
                 const link = document.createElement('a');
-                link.download = 'My_Exam_Schedule.png';
+                link.download = 'My_Exam_Schedule_2026.png';
                 link.href = canvas.toDataURL("image/png");
                 link.click();
-                showSuccess(t.successTitle, t.successDescImg);
+                document.getElementById('success-message').classList.remove('hidden');
             });
-        }
-        function showSuccess(title, desc) {
-            const successMsg = document.getElementById('success-message');
-            document.getElementById('success-title').innerText = title;
-            document.getElementById('success-desc').innerText = desc;
-            successMsg.classList.remove('hidden');
-        }
-        // 初始化
-        updateUIText();
-        renderSections();
-        updatePreview();
+        };
+
+        // Init
+        renderButtons();
+        updateUI();
+
     </script>
 </body>
 </html>
