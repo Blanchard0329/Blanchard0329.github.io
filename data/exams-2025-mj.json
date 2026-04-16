@@ -1,0 +1,2841 @@
+{
+  "meta": {
+    "name": "May/June 2025 External Exam Timetable",
+    "generatedAt": "2026-03-08T10:23:04Z",
+    "levels": [
+      "IG",
+      "AS",
+      "A2"
+    ],
+    "qualifications": [
+      "Cambridge IGCSE",
+      "Cambridge International AS & A Level",
+      "Edexcel IAL",
+      "Edexcel IGCSE"
+    ],
+    "totalExamFamilies": 96,
+    "dateRange": {
+      "start": "2025-04-25",
+      "end": "2025-06-13"
+    },
+    "timezone": "Asia/Shanghai"
+  },
+  "examFamilies": [
+    {
+      "id": "cie-ig-0509-13-first-language-chinese",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "First Language Chinese",
+      "code": "0509/13",
+      "paper": "Reading, Directed Writing and Classical Chinese 13",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-04-25",
+          "start": "09:00",
+          "end": "11:15",
+          "startMinutes": 540,
+          "endMinutes": 675,
+          "durationMinutes": 135,
+          "entries": 50,
+          "fullSupervisionRequired": false,
+          "arrival": "08:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0509/13",
+          "originalTitle": "Reading, Directed Writing and Classical Chinese 13"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0509-23-first-language-chinese",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "First Language Chinese",
+      "code": "0509/23",
+      "paper": "Writing 23",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-04-28",
+          "start": "09:20",
+          "end": "11:20",
+          "startMinutes": 560,
+          "endMinutes": 680,
+          "durationMinutes": 120,
+          "entries": 50,
+          "fullSupervisionRequired": true,
+          "arrival": "08:40",
+          "venue": "INT MPR",
+          "note": "Exam venue changed due to Sports Day",
+          "originalCode": "0509/23",
+          "originalTitle": "Writing 23"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0580-23-mathematics-without-coursework",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Mathematics (Without Coursework)",
+      "code": "0580/23",
+      "paper": "Paper 23 Non-calculator (Extended)",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-04-30",
+          "start": "08:40",
+          "end": "10:40",
+          "startMinutes": 520,
+          "endMinutes": 640,
+          "durationMinutes": 120,
+          "entries": 16,
+          "fullSupervisionRequired": false,
+          "arrival": "08:20",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0580/23",
+          "originalTitle": "Paper 23 Non-calculator (Extended)"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0620-42-chemistry",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Chemistry",
+      "code": "0620/42",
+      "paper": "Theory (Extended) 42",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-04-30",
+          "start": "13:00",
+          "end": "14:15",
+          "startMinutes": 780,
+          "endMinutes": 855,
+          "durationMinutes": 75,
+          "entries": 40,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406 E1405",
+          "note": "",
+          "originalCode": "0620/42",
+          "originalTitle": "Theory (Extended) 42"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0610-42-biology",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Biology",
+      "code": "0610/42",
+      "paper": "Theory (Extended) 42",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-06",
+          "start": "13:20",
+          "end": "14:35",
+          "startMinutes": 800,
+          "endMinutes": 875,
+          "durationMinutes": 75,
+          "entries": 8,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0610/42",
+          "originalTitle": "Theory (Extended) 42"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0580-43-mathematics-without-coursework",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Mathematics (Without Coursework)",
+      "code": "0580/43",
+      "paper": "Paper 43 Calculator (Extended)",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-07",
+          "start": "09:15",
+          "end": "11:15",
+          "startMinutes": 555,
+          "endMinutes": 675,
+          "durationMinutes": 120,
+          "entries": 16,
+          "fullSupervisionRequired": true,
+          "arrival": "08:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0580/43",
+          "originalTitle": "Paper 43 Calculator (Extended)"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0457-13-global-perspectives",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Global Perspectives",
+      "code": "0457/13",
+      "paper": "Written Exam 13",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "08:20",
+          "end": "09:45",
+          "startMinutes": 500,
+          "endMinutes": 585,
+          "durationMinutes": 85,
+          "entries": 3,
+          "fullSupervisionRequired": false,
+          "arrival": "08:00",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0457/13",
+          "originalTitle": "Written Exam 13"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0417-13-information-and-communication-technology",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Information and Communication Technology",
+      "code": "0417/13",
+      "paper": "Theory 13",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "08:20",
+          "end": "09:50",
+          "startMinutes": 500,
+          "endMinutes": 590,
+          "durationMinutes": 90,
+          "entries": 2,
+          "fullSupervisionRequired": false,
+          "arrival": "08:00",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0417/13",
+          "originalTitle": "Theory 13"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0472-22-english-as-an-additional-language",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "English (as an Additional Language)",
+      "code": "0472/22",
+      "paper": "Reading 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "13:00",
+          "end": "14:00",
+          "startMinutes": 780,
+          "endMinutes": 840,
+          "durationMinutes": 60,
+          "entries": 29,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1044",
+          "note": "",
+          "originalCode": "0472/22",
+          "originalTitle": "Reading 22"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0511-12-english-as-a-second-language-count-in-speaking",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "English as a Second Language (Count-in Speaking)",
+      "code": "0511/12",
+      "paper": "Reading and Writing 12",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "13:00",
+          "end": "15:00",
+          "startMinutes": 780,
+          "endMinutes": 900,
+          "durationMinutes": 120,
+          "entries": 35,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0511/12-S1",
+          "originalTitle": "Reading and Writing 12-S1"
+        },
+        {
+          "session": "S2",
+          "date": "2025-05-08",
+          "start": "14:40",
+          "end": "16:40",
+          "startMinutes": 880,
+          "endMinutes": 1000,
+          "durationMinutes": 120,
+          "entries": 3,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1404",
+          "note": "",
+          "originalCode": "0511/12-S2",
+          "originalTitle": "Reading and Writing 12-S2"
+        },
+        {
+          "session": "S3",
+          "date": "2025-05-08",
+          "start": "16:55",
+          "end": "18:55",
+          "startMinutes": 1015,
+          "endMinutes": 1135,
+          "durationMinutes": 120,
+          "entries": 5,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1404",
+          "note": "",
+          "originalCode": "0511/12-S3",
+          "originalTitle": "Reading and Writing 12-S3"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0500-12-first-language-english-oral-endorsement",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "First Language English (Oral Endorsement)",
+      "code": "0500/12",
+      "paper": "Reading 12",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "13:00",
+          "end": "15:00",
+          "startMinutes": 780,
+          "endMinutes": 900,
+          "durationMinutes": 120,
+          "entries": 3,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0500/12",
+          "originalTitle": "Reading 12"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0472-42-english-as-an-additional-language",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "English (as an Additional Language)",
+      "code": "0472/42",
+      "paper": "Writing 42",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "14:20",
+          "end": "15:20",
+          "startMinutes": 860,
+          "endMinutes": 920,
+          "durationMinutes": 60,
+          "entries": 29,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1044",
+          "note": "",
+          "originalCode": "0472/42",
+          "originalTitle": "Writing 42"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0510-12-english-as-a-second-language-speaking-endorsement",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "English as a Second Language (Speaking Endorsement)",
+      "code": "0510/12",
+      "paper": "Reading and Writing 12",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "14:40",
+          "end": "16:40",
+          "startMinutes": 880,
+          "endMinutes": 1000,
+          "durationMinutes": 120,
+          "entries": 1,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1404",
+          "note": "",
+          "originalCode": "0510/12",
+          "originalTitle": "Reading and Writing 12"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0625-42-physics",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Physics",
+      "code": "0625/42",
+      "paper": "Theory (Extended) 42",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-09",
+          "start": "13:00",
+          "end": "14:15",
+          "startMinutes": 780,
+          "endMinutes": 855,
+          "durationMinutes": 75,
+          "entries": 52,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0625/42",
+          "originalTitle": "Theory (Extended) 42"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-ig-4bs1-01r-business",
+      "level": "IG",
+      "board": "Edexcel",
+      "qualification": "Edexcel IGCSE",
+      "subject": "Business",
+      "code": "4BS1 01R",
+      "paper": "Paper 1R: Investigating small businesses",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-09",
+          "start": "15:30",
+          "end": "17:00",
+          "startMinutes": 930,
+          "endMinutes": 1020,
+          "durationMinutes": 90,
+          "entries": 5,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "4BS1 01R",
+          "originalTitle": "Paper 1R: Investigating small businesses"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0475-13-literature-in-english",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Literature in English",
+      "code": "0475/13",
+      "paper": "Poetry and Prose 13",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-12",
+          "start": "08:30",
+          "end": "10:00",
+          "startMinutes": 510,
+          "endMinutes": 600,
+          "durationMinutes": 90,
+          "entries": 2,
+          "fullSupervisionRequired": false,
+          "arrival": "08:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0475/13",
+          "originalTitle": "Poetry and Prose 13"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0610-62-biology",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Biology",
+      "code": "0610/62",
+      "paper": "Alternative to Practical 62",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-13",
+          "start": "13:00",
+          "end": "14:00",
+          "startMinutes": 780,
+          "endMinutes": 840,
+          "durationMinutes": 60,
+          "entries": 8,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0610/62",
+          "originalTitle": "Alternative to Practical 62"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0475-33-literature-in-english",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Literature in English",
+      "code": "0475/33",
+      "paper": "Drama (Open Text) 33",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-14",
+          "start": "09:20",
+          "end": "10:05",
+          "startMinutes": 560,
+          "endMinutes": 605,
+          "durationMinutes": 45,
+          "entries": 2,
+          "fullSupervisionRequired": true,
+          "arrival": "08:40",
+          "venue": "E2102",
+          "note": "Unannotated set texts allowed in exam",
+          "originalCode": "0475/33",
+          "originalTitle": "Drama (Open Text) 33"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-ig-4ec1-01r-economics-linear",
+      "level": "IG",
+      "board": "Edexcel",
+      "qualification": "Edexcel IGCSE",
+      "subject": "Economics (Linear)",
+      "code": "4EC1 01R",
+      "paper": "Paper 1R: Microeconomics and Business Economics",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-14",
+          "start": "15:30",
+          "end": "17:00",
+          "startMinutes": 930,
+          "endMinutes": 1020,
+          "durationMinutes": 90,
+          "entries": 24,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "4EC1 01R",
+          "originalTitle": "Paper 1R: Microeconomics and Business Economics"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0620-62-chemistry",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Chemistry",
+      "code": "0620/62",
+      "paper": "Alternative to Practical 62",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-15",
+          "start": "13:00",
+          "end": "14:00",
+          "startMinutes": 780,
+          "endMinutes": 840,
+          "durationMinutes": 60,
+          "entries": 10,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E2101",
+          "note": "",
+          "originalCode": "0620/62-S1",
+          "originalTitle": "Alternative to Practical 62-S1"
+        },
+        {
+          "session": "S2",
+          "date": "2025-05-15",
+          "start": "15:30",
+          "end": "16:30",
+          "startMinutes": 930,
+          "endMinutes": 990,
+          "durationMinutes": 60,
+          "entries": 30,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0620/62-S2",
+          "originalTitle": "Alternative to Practical 62-S2"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-ig-4ma1-1hr-mathematics-a-linear",
+      "level": "IG",
+      "board": "Edexcel",
+      "qualification": "Edexcel IGCSE",
+      "subject": "Mathematics A (Linear)",
+      "code": "4MA1 1HR",
+      "paper": "Paper 1HR Higher Tier",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-15",
+          "start": "13:00",
+          "end": "15:00",
+          "startMinutes": 780,
+          "endMinutes": 900,
+          "durationMinutes": 120,
+          "entries": 52,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "4MA1 1HR",
+          "originalTitle": "Paper 1HR Higher Tier"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0450-12-business-studies",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Business Studies",
+      "code": "0450/12",
+      "paper": "Short Answer/Data Response 12",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-16",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0450/12",
+          "originalTitle": "Short Answer/Data Response 12"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-ig-4bs1-02r-business",
+      "level": "IG",
+      "board": "Edexcel",
+      "qualification": "Edexcel IGCSE",
+      "subject": "Business",
+      "code": "4BS1 02R",
+      "paper": "Paper 2R: Investigating large businesses",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-16",
+          "start": "15:30",
+          "end": "17:00",
+          "startMinutes": 930,
+          "endMinutes": 1020,
+          "durationMinutes": 90,
+          "entries": 5,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "4BS1 02R",
+          "originalTitle": "Paper 2R: Investigating large businesses"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0450-22-business-studies",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Business Studies",
+      "code": "0450/22",
+      "paper": "Case Study 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-19",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0450/22",
+          "originalTitle": "Case Study 22"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0625-62-physics",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Physics",
+      "code": "0625/62",
+      "paper": "Alternative to Practical 62",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-20",
+          "start": "13:00",
+          "end": "14:00",
+          "startMinutes": 780,
+          "endMinutes": 840,
+          "durationMinutes": 60,
+          "entries": 52,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0625/62",
+          "originalTitle": "Alternative to Practical 62"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0410-13-music",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Music",
+      "code": "0410/13",
+      "paper": "Listening 13",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-22",
+          "start": "08:20",
+          "end": "09:35",
+          "startMinutes": 500,
+          "endMinutes": 575,
+          "durationMinutes": 75,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "08:00",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0410/13",
+          "originalTitle": "Listening 13"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0472-12-english-as-an-additional-language",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "English (as an Additional Language)",
+      "code": "0472/12",
+      "paper": "Listening (Multiple Choice) 12",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-22",
+          "start": "13:00",
+          "end": "13:50",
+          "startMinutes": 780,
+          "endMinutes": 830,
+          "durationMinutes": 50,
+          "entries": 29,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1044",
+          "note": "",
+          "originalCode": "0472/12",
+          "originalTitle": "Listening (Multiple Choice) 12"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0511-22-english-as-a-second-language-count-in-speaking",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "English as a Second Language (Count-in Speaking)",
+      "code": "0511/22",
+      "paper": "Listening Multiple Choice 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-22",
+          "start": "13:00",
+          "end": "13:50",
+          "startMinutes": 780,
+          "endMinutes": 830,
+          "durationMinutes": 50,
+          "entries": 43,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0511/22",
+          "originalTitle": "Listening Multiple Choice 22"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0510-22-english-as-a-second-language-speaking-endorsement",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "English as a Second Language (Speaking Endorsement)",
+      "code": "0510/22",
+      "paper": "Listening Multiple Choice 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-22",
+          "start": "13:00",
+          "end": "13:50",
+          "startMinutes": 780,
+          "endMinutes": 830,
+          "durationMinutes": 50,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1404",
+          "note": "",
+          "originalCode": "0510/22",
+          "originalTitle": "Listening Multiple Choice 22"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-ig-4ec1-02r-economics-linear",
+      "level": "IG",
+      "board": "Edexcel",
+      "qualification": "Edexcel IGCSE",
+      "subject": "Economics (Linear)",
+      "code": "4EC1 02R",
+      "paper": "Paper 2R: Macroeconomics and the Global Economy",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-22",
+          "start": "15:30",
+          "end": "17:00",
+          "startMinutes": 930,
+          "endMinutes": 1020,
+          "durationMinutes": 90,
+          "entries": 24,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "4EC1 02R",
+          "originalTitle": "Paper 2R: Macroeconomics and the Global Economy"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0455-22-economics",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Economics",
+      "code": "0455/22",
+      "paper": "Structured Questions 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-23",
+          "start": "13:00",
+          "end": "15:15",
+          "startMinutes": 780,
+          "endMinutes": 915,
+          "durationMinutes": 135,
+          "entries": 14,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0455/22",
+          "originalTitle": "Structured Questions 22"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-ig-4ma1-2hr-mathematics-a-linear",
+      "level": "IG",
+      "board": "Edexcel",
+      "qualification": "Edexcel IGCSE",
+      "subject": "Mathematics A (Linear)",
+      "code": "4MA1 2HR",
+      "paper": "Paper 2HR Higher Tier",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-04",
+          "start": "13:00",
+          "end": "15:00",
+          "startMinutes": 780,
+          "endMinutes": 900,
+          "durationMinutes": 120,
+          "entries": 52,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "4MA1 2HR",
+          "originalTitle": "Paper 2HR Higher Tier"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0625-22-physics",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Physics",
+      "code": "0625/22",
+      "paper": "Multiple Choice (Extended) 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-04",
+          "start": "13:00",
+          "end": "13:45",
+          "startMinutes": 780,
+          "endMinutes": 825,
+          "durationMinutes": 45,
+          "entries": 13,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E2101",
+          "note": "",
+          "originalCode": "0625/22-S1",
+          "originalTitle": "Multiple Choice (Extended) 22-S1"
+        },
+        {
+          "session": "S2",
+          "date": "2025-06-04",
+          "start": "15:20",
+          "end": "16:05",
+          "startMinutes": 920,
+          "endMinutes": 965,
+          "durationMinutes": 45,
+          "entries": 39,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0625/22-S2",
+          "originalTitle": "Multiple Choice (Extended) 22-S2"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0455-12-economics",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Economics",
+      "code": "0455/12",
+      "paper": "Multiple Choice 12",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-05",
+          "start": "13:00",
+          "end": "13:45",
+          "startMinutes": 780,
+          "endMinutes": 825,
+          "durationMinutes": 45,
+          "entries": 14,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E2101",
+          "note": "",
+          "originalCode": "0455/12",
+          "originalTitle": "Multiple Choice 12"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0620-22-chemistry",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Chemistry",
+      "code": "0620/22",
+      "paper": "Multiple Choice (Extended) 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-10",
+          "start": "13:00",
+          "end": "13:45",
+          "startMinutes": 780,
+          "endMinutes": 825,
+          "durationMinutes": 45,
+          "entries": 40,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "0620/22",
+          "originalTitle": "Multiple Choice (Extended) 22"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-ig-0610-22-biology",
+      "level": "IG",
+      "board": "CIE",
+      "qualification": "Cambridge IGCSE",
+      "subject": "Biology",
+      "code": "0610/22",
+      "paper": "Multiple Choice (Extended) 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-11",
+          "start": "13:00",
+          "end": "13:45",
+          "startMinutes": 780,
+          "endMinutes": 825,
+          "durationMinutes": 45,
+          "entries": 8,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "0610/22",
+          "originalTitle": "Multiple Choice (Extended) 22"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9709-15-mathematics",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Mathematics",
+      "code": "9709/15",
+      "paper": "Pure Mathematics 1 (15)",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-04-28",
+          "start": "09:20",
+          "end": "11:10",
+          "startMinutes": 560,
+          "endMinutes": 670,
+          "durationMinutes": 110,
+          "entries": 12,
+          "fullSupervisionRequired": true,
+          "arrival": "08:40",
+          "venue": "INT MPR",
+          "note": "Exam venue changed due to Sports Day",
+          "originalCode": "9709/15",
+          "originalTitle": "Pure Mathematics 1 (15)"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9990-12-psychology",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Psychology",
+      "code": "9990/12",
+      "paper": "Approaches, Issues and Debates 12",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-04-30",
+          "start": "13:20",
+          "end": "14:50",
+          "startMinutes": 800,
+          "endMinutes": 890,
+          "durationMinutes": 90,
+          "entries": 6,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E2101",
+          "note": "",
+          "originalCode": "9990/12",
+          "originalTitle": "Approaches, Issues and Debates 12"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9868-22-chinese-language-and-literature",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Chinese Language and Literature",
+      "code": "9868/22",
+      "paper": "Writing 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-04-30",
+          "start": "13:40",
+          "end": "15:40",
+          "startMinutes": 820,
+          "endMinutes": 940,
+          "durationMinutes": 120,
+          "entries": 51,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "9868/22-S1",
+          "originalTitle": "Writing 22-S1"
+        },
+        {
+          "session": "S2",
+          "date": "2025-04-30",
+          "start": "15:10",
+          "end": "17:10",
+          "startMinutes": 910,
+          "endMinutes": 1030,
+          "durationMinutes": 120,
+          "entries": 1,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "9868/22-S2",
+          "originalTitle": "Writing 22-S2"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wbi11-01-biology",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Biology",
+      "code": "WBI11 01",
+      "paper": "Unit 1: Molecules, Diet, Transport and Health",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-06",
+          "start": "13:20",
+          "end": "14:50",
+          "startMinutes": 800,
+          "endMinutes": 890,
+          "durationMinutes": 90,
+          "entries": 1,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WBI11 01",
+          "originalTitle": "Unit 1: Molecules, Diet, Transport and Health"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9990-22-psychology",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Psychology",
+      "code": "9990/22",
+      "paper": "Research Methods 22",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-06",
+          "start": "13:20",
+          "end": "14:50",
+          "startMinutes": 800,
+          "endMinutes": 890,
+          "durationMinutes": 90,
+          "entries": 6,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "9990/22",
+          "originalTitle": "Research Methods 22"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wbs11-01-business",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Business",
+      "code": "WBS11 01",
+      "paper": "Unit 1: Marketing and People",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-07",
+          "start": "15:30",
+          "end": "17:30",
+          "startMinutes": 930,
+          "endMinutes": 1050,
+          "durationMinutes": 120,
+          "entries": 6,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WBS11 01",
+          "originalTitle": "Unit 1: Marketing and People"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wma11-01-mathematics",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Mathematics",
+      "code": "WMA11 01",
+      "paper": "P1: Pure Mathematics 1",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 44,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406 E1405",
+          "note": "",
+          "originalCode": "WMA11 01",
+          "originalTitle": "P1: Pure Mathematics 1"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9868-32-chinese-language-and-literature",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Chinese Language and Literature",
+      "code": "9868/32",
+      "paper": "Literature 32",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "13:30",
+          "end": "15:30",
+          "startMinutes": 810,
+          "endMinutes": 930,
+          "durationMinutes": 120,
+          "entries": 19,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E2102",
+          "note": "Unannotated set texts allowed in exam",
+          "originalCode": "9868/32-S1",
+          "originalTitle": "Literature 32-S1"
+        },
+        {
+          "session": "S2",
+          "date": "2025-05-08",
+          "start": "14:40",
+          "end": "16:40",
+          "startMinutes": 880,
+          "endMinutes": 1000,
+          "durationMinutes": 120,
+          "entries": 31,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1406 E1405",
+          "note": "Unannotated set texts allowed in exam",
+          "originalCode": "9868/32-S2",
+          "originalTitle": "Literature 32-S2"
+        },
+        {
+          "session": "S3",
+          "date": "2025-05-08",
+          "start": "17:45",
+          "end": "19:45",
+          "startMinutes": 1065,
+          "endMinutes": 1185,
+          "durationMinutes": 120,
+          "entries": 2,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "Unannotated set texts allowed in exam",
+          "originalCode": "9868/32-S3",
+          "originalTitle": "Literature 32-S3"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wec11-01-economics",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Economics",
+      "code": "WEC11 01",
+      "paper": "Unit 1: Markets in Action",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "15:30",
+          "end": "17:15",
+          "startMinutes": 930,
+          "endMinutes": 1035,
+          "durationMinutes": 105,
+          "entries": 4,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1405",
+          "note": "",
+          "originalCode": "WEC11 01",
+          "originalTitle": "Unit 1: Markets in Action"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9700-37-biology",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Biology",
+      "code": "9700/37",
+      "paper": "Advanced Practical Skills 37",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-08",
+          "start": "16:55",
+          "end": "18:55",
+          "startMinutes": 1015,
+          "endMinutes": 1135,
+          "durationMinutes": 120,
+          "entries": 11,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "Lab-E2208",
+          "note": "",
+          "originalCode": "9700/37",
+          "originalTitle": "Advanced Practical Skills 37"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wph11-01-physics",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Physics",
+      "code": "WPH11 01",
+      "paper": "Unit 1: Mechanics and Materials",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-09",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "WPH11 01",
+          "originalTitle": "Unit 1: Mechanics and Materials"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wac11-01-accounting",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Accounting",
+      "code": "WAC11 01",
+      "paper": "Unit 1: The Accounting System and Costing",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-09",
+          "start": "15:30",
+          "end": "18:30",
+          "startMinutes": 930,
+          "endMinutes": 1110,
+          "durationMinutes": 180,
+          "entries": 12,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WAC11 01",
+          "originalTitle": "Unit 1: The Accounting System and Costing"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wbs12-01-business",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Business",
+      "code": "WBS12 01",
+      "paper": "Unit 2: Managing Business Activities",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-12",
+          "start": "15:30",
+          "end": "17:30",
+          "startMinutes": 930,
+          "endMinutes": 1050,
+          "durationMinutes": 120,
+          "entries": 7,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1405",
+          "note": "",
+          "originalCode": "WBS12 01",
+          "originalTitle": "Unit 2: Managing Business Activities"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wma12-01-mathematics",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Mathematics",
+      "code": "WMA12 01",
+      "paper": "P2: Pure Mathematics 2",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-13",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 49,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "WMA12 01",
+          "originalTitle": "P2: Pure Mathematics 2"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9708-24-economics",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Economics",
+      "code": "9708/24",
+      "paper": "AS Level Data Response and Essays 24",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-14",
+          "start": "13:20",
+          "end": "15:20",
+          "startMinutes": 800,
+          "endMinutes": 920,
+          "durationMinutes": 120,
+          "entries": 11,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E2101",
+          "note": "",
+          "originalCode": "9708/24",
+          "originalTitle": "AS Level Data Response and Essays 24"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wph12-01-physics",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Physics",
+      "code": "WPH12 01",
+      "paper": "Unit 2: Waves and Electricity",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-14",
+          "start": "13:20",
+          "end": "14:50",
+          "startMinutes": 800,
+          "endMinutes": 890,
+          "durationMinutes": 90,
+          "entries": 1,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E2101",
+          "note": "",
+          "originalCode": "WPH12 01",
+          "originalTitle": "Unit 2: Waves and Electricity"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wec12-01-economics",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Economics",
+      "code": "WEC12 01",
+      "paper": "Unit 2: Macroeconomic Performance and Policy",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-14",
+          "start": "15:30",
+          "end": "17:15",
+          "startMinutes": 930,
+          "endMinutes": 1035,
+          "durationMinutes": 105,
+          "entries": 28,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "WEC12 01",
+          "originalTitle": "Unit 2: Macroeconomic Performance and Policy"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9700-24-biology",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Biology",
+      "code": "9700/24",
+      "paper": "AS Level Structured Questions 24",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-15",
+          "start": "13:40",
+          "end": "14:55",
+          "startMinutes": 820,
+          "endMinutes": 895,
+          "durationMinutes": 75,
+          "entries": 11,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1044",
+          "note": "",
+          "originalCode": "9700/24",
+          "originalTitle": "AS Level Structured Questions 24"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wbi12-01-biology",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Biology",
+      "code": "WBI12 01",
+      "paper": "Unit 2: Cells, Development, Biodiversity and Conservation",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-16",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WBI12 01",
+          "originalTitle": "Unit 2: Cells, Development, Biodiversity and Conservation"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9709-35-mathematics",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Mathematics",
+      "code": "9709/35",
+      "paper": "Pure Mathematics 3 (35)",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-19",
+          "start": "09:20",
+          "end": "11:10",
+          "startMinutes": 560,
+          "endMinutes": 670,
+          "durationMinutes": 110,
+          "entries": 4,
+          "fullSupervisionRequired": true,
+          "arrival": "08:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "9709/35",
+          "originalTitle": "Pure Mathematics 3 (35)"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9701-24-chemistry",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Chemistry",
+      "code": "9701/24",
+      "paper": "AS Level Structured Questions 24",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-19",
+          "start": "14:10",
+          "end": "15:25",
+          "startMinutes": 850,
+          "endMinutes": 925,
+          "durationMinutes": 75,
+          "entries": 29,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "9701/24",
+          "originalTitle": "AS Level Structured Questions 24"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wst01-01-mathematics",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Mathematics",
+      "code": "WST01 01",
+      "paper": "S1: Statistics 1",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-20",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 48,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1044",
+          "note": "",
+          "originalCode": "WST01 01",
+          "originalTitle": "S1: Statistics 1"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9702-24-physics",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Physics",
+      "code": "9702/24",
+      "paper": "AS Level Structured Questions 24",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-20",
+          "start": "14:30",
+          "end": "15:45",
+          "startMinutes": 870,
+          "endMinutes": 945,
+          "durationMinutes": 75,
+          "entries": 16,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "9702/24-S1",
+          "originalTitle": "AS Level Structured Questions 24-S1"
+        },
+        {
+          "session": "S2",
+          "date": "2025-05-20",
+          "start": "15:00",
+          "end": "16:15",
+          "startMinutes": 900,
+          "endMinutes": 975,
+          "durationMinutes": 75,
+          "entries": 19,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1044",
+          "note": "",
+          "originalCode": "9702/24-S2",
+          "originalTitle": "AS Level Structured Questions 24-S2"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9618-33-computer-science",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Computer Science",
+      "code": "9618/33",
+      "paper": "Advanced Theory 33",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-21",
+          "start": "09:20",
+          "end": "10:50",
+          "startMinutes": 560,
+          "endMinutes": 650,
+          "durationMinutes": 90,
+          "entries": 6,
+          "fullSupervisionRequired": true,
+          "arrival": "08:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "9618/33",
+          "originalTitle": "Advanced Theory 33"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wfm01-01-further-mathematics",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Further Mathematics",
+      "code": "WFM01 01",
+      "paper": "FP1: Further Pure Mathematics 1",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-22",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 10,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WFM01 01",
+          "originalTitle": "FP1: Further Pure Mathematics 1"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9702-38-physics",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Physics",
+      "code": "9702/38",
+      "paper": "Advanced Practical Skills 38",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-22",
+          "start": "15:00",
+          "end": "17:00",
+          "startMinutes": 900,
+          "endMinutes": 1020,
+          "durationMinutes": 120,
+          "entries": 35,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "Lab-E2104 Lab-E2105 Lab-E2208",
+          "note": "",
+          "originalCode": "9702/38",
+          "originalTitle": "Advanced Practical Skills 38"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wac12-01-accounting",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Accounting",
+      "code": "WAC12 01",
+      "paper": "Unit 2: Corporate and Management Accounting",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-23",
+          "start": "15:30",
+          "end": "18:30",
+          "startMinutes": 930,
+          "endMinutes": 1110,
+          "durationMinutes": 180,
+          "entries": 5,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1405",
+          "note": "",
+          "originalCode": "WAC12 01",
+          "originalTitle": "Unit 2: Corporate and Management Accounting"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9868-12-chinese-language-and-literature",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Chinese Language and Literature",
+      "code": "9868/12",
+      "paper": "Reading (Multiple Choice) 12",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-26",
+          "start": "14:00",
+          "end": "15:30",
+          "startMinutes": 840,
+          "endMinutes": 930,
+          "durationMinutes": 90,
+          "entries": 52,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "9868/12",
+          "originalTitle": "Reading (Multiple Choice) 12"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9701-38-chemistry",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Chemistry",
+      "code": "9701/38",
+      "paper": "Advanced Practical Skills 38",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-29",
+          "start": "15:00",
+          "end": "17:00",
+          "startMinutes": 900,
+          "endMinutes": 1020,
+          "durationMinutes": 120,
+          "entries": 29,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "Lab-E2207 Lab-E2208 Lab-E2307 Lab-E2308",
+          "note": "",
+          "originalCode": "9701/38",
+          "originalTitle": "Advanced Practical Skills 38"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-as-wfm02-01-further-mathematics",
+      "level": "AS",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Further Mathematics",
+      "code": "WFM02 01",
+      "paper": "FP2: Further Pure Mathematics 2",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-03",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 12,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WFM02 01",
+          "originalTitle": "FP2: Further Pure Mathematics 2"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9701-14-chemistry",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Chemistry",
+      "code": "9701/14",
+      "paper": "Multiple Choice 14",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-04",
+          "start": "14:00",
+          "end": "15:15",
+          "startMinutes": 840,
+          "endMinutes": 915,
+          "durationMinutes": 75,
+          "entries": 29,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1044",
+          "note": "",
+          "originalCode": "9701/14",
+          "originalTitle": "Multiple Choice 14"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9702-14-physics",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Physics",
+      "code": "9702/14",
+      "paper": "Multiple Choice 14",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-05",
+          "start": "13:40",
+          "end": "14:55",
+          "startMinutes": 820,
+          "endMinutes": 895,
+          "durationMinutes": 75,
+          "entries": 35,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "9702/14",
+          "originalTitle": "Multiple Choice 14"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9708-14-economics",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Economics",
+      "code": "9708/14",
+      "paper": "AS Level Multiple Choice 14",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-09",
+          "start": "13:20",
+          "end": "14:20",
+          "startMinutes": 800,
+          "endMinutes": 860,
+          "durationMinutes": 60,
+          "entries": 11,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "9708/14",
+          "originalTitle": "AS Level Multiple Choice 14"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-as-9700-14-biology",
+      "level": "AS",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Biology",
+      "code": "9700/14",
+      "paper": "Multiple Choice 14",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-10",
+          "start": "13:20",
+          "end": "14:35",
+          "startMinutes": 800,
+          "endMinutes": 875,
+          "durationMinutes": 75,
+          "entries": 11,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E2102",
+          "note": "",
+          "originalCode": "9700/14",
+          "originalTitle": "Multiple Choice 14"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wme01-01-mathematics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Mathematics",
+      "code": "WME01 01",
+      "paper": "M1: Mechanics 1",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-06",
+          "start": "16:00",
+          "end": "17:30",
+          "startMinutes": 960,
+          "endMinutes": 1050,
+          "durationMinutes": 90,
+          "entries": 41,
+          "fullSupervisionRequired": false,
+          "arrival": "15:40",
+          "venue": "E1406 E1405",
+          "note": "",
+          "originalCode": "WME01 01",
+          "originalTitle": "M1: Mechanics 1"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-a2-9709-45-mathematics",
+      "level": "A2",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Mathematics",
+      "code": "9709/45",
+      "paper": "Mechanics (45)",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-07",
+          "start": "09:15",
+          "end": "10:30",
+          "startMinutes": 555,
+          "endMinutes": 630,
+          "durationMinutes": 75,
+          "entries": 4,
+          "fullSupervisionRequired": true,
+          "arrival": "08:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "9709/45",
+          "originalTitle": "Mechanics (45)"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-a2-9701-44-chemistry",
+      "level": "A2",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Chemistry",
+      "code": "9701/44",
+      "paper": "A Level Structured Questions 44",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-09",
+          "start": "13:20",
+          "end": "15:20",
+          "startMinutes": 800,
+          "endMinutes": 920,
+          "durationMinutes": 120,
+          "entries": 18,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E2102",
+          "note": "",
+          "originalCode": "9701/44",
+          "originalTitle": "A Level Structured Questions 44"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-a2-9700-44-biology",
+      "level": "A2",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Biology",
+      "code": "9700/44",
+      "paper": "A Level Structured Questions 44",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-12",
+          "start": "13:20",
+          "end": "15:20",
+          "startMinutes": 800,
+          "endMinutes": 920,
+          "durationMinutes": 120,
+          "entries": 19,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "9700/44",
+          "originalTitle": "A Level Structured Questions 44"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-a2-9709-55-mathematics",
+      "level": "A2",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Mathematics",
+      "code": "9709/55",
+      "paper": "Probability & Statistics 1 (55)",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-14",
+          "start": "09:20",
+          "end": "10:35",
+          "startMinutes": 560,
+          "endMinutes": 635,
+          "durationMinutes": 75,
+          "entries": 12,
+          "fullSupervisionRequired": true,
+          "arrival": "08:40",
+          "venue": "E2102",
+          "note": "",
+          "originalCode": "9709/55",
+          "originalTitle": "Probability & Statistics 1 (55)"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-a2-9700-54-biology",
+      "level": "A2",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Biology",
+      "code": "9700/54",
+      "paper": "Planning, Analysis and Evaluation 54",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-15",
+          "start": "13:40",
+          "end": "14:55",
+          "startMinutes": 820,
+          "endMinutes": 895,
+          "durationMinutes": 75,
+          "entries": 19,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1044",
+          "note": "",
+          "originalCode": "9700/54",
+          "originalTitle": "Planning, Analysis and Evaluation 54"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-a2-9702-44-physics",
+      "level": "A2",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Physics",
+      "code": "9702/44",
+      "paper": "A Level Structured Questions 44",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-16",
+          "start": "14:00",
+          "end": "16:00",
+          "startMinutes": 840,
+          "endMinutes": 960,
+          "durationMinutes": 120,
+          "entries": 38,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "9702/44",
+          "originalTitle": "A Level Structured Questions 44"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wph13-01-physics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Physics",
+      "code": "WPH13 01",
+      "paper": "Unit 3: Practical Skills in Physics I",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-19",
+          "start": "12:30",
+          "end": "13:50",
+          "startMinutes": 750,
+          "endMinutes": 830,
+          "durationMinutes": 80,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:10",
+          "venue": "E1405",
+          "note": "",
+          "originalCode": "WPH13 01",
+          "originalTitle": "Unit 3: Practical Skills in Physics I"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-a2-9701-54-chemistry",
+      "level": "A2",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Chemistry",
+      "code": "9701/54",
+      "paper": "Planning, Analysis and Evaluation 54",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-19",
+          "start": "14:10",
+          "end": "15:25",
+          "startMinutes": 850,
+          "endMinutes": 925,
+          "durationMinutes": 75,
+          "entries": 18,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "9701/54",
+          "originalTitle": "Planning, Analysis and Evaluation 54"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "cie-a2-9702-54-physics",
+      "level": "A2",
+      "board": "CIE",
+      "qualification": "Cambridge International AS & A Level",
+      "subject": "Physics",
+      "code": "9702/54",
+      "paper": "Planning, Analysis and Evaluation 54",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-20",
+          "start": "14:30",
+          "end": "15:45",
+          "startMinutes": 870,
+          "endMinutes": 945,
+          "durationMinutes": 75,
+          "entries": 38,
+          "fullSupervisionRequired": true,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "9702/54",
+          "originalTitle": "Planning, Analysis and Evaluation 54"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wbi13-01-biology",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Biology",
+      "code": "WBI13 01",
+      "paper": "Unit 3: Practical Skills in Biology I",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-21",
+          "start": "13:00",
+          "end": "14:20",
+          "startMinutes": 780,
+          "endMinutes": 860,
+          "durationMinutes": 80,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WBI13 01",
+          "originalTitle": "Unit 3: Practical Skills in Biology I"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wec13-01-economics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Economics",
+      "code": "WEC13 01",
+      "paper": "Unit 3: Business Behaviour",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-27",
+          "start": "15:30",
+          "end": "17:30",
+          "startMinutes": 930,
+          "endMinutes": 1050,
+          "durationMinutes": 120,
+          "entries": 15,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WEC13 01",
+          "originalTitle": "Unit 3: Business Behaviour"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wbs13-01-business",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Business",
+      "code": "WBS13 01",
+      "paper": "Unit 3: Business Decisions And Strategy",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-28",
+          "start": "15:30",
+          "end": "17:30",
+          "startMinutes": 930,
+          "endMinutes": 1050,
+          "durationMinutes": 120,
+          "entries": 3,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WBS13 01",
+          "originalTitle": "Unit 3: Business Decisions And Strategy"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wma13-01-mathematics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Mathematics",
+      "code": "WMA13 01",
+      "paper": "P3: Pure Mathematics 3",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-05-29",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 34,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "WMA13 01",
+          "originalTitle": "P3: Pure Mathematics 3"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wme02-01-further-mathematics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Further Mathematics",
+      "code": "WME02 01",
+      "paper": "M2: Mechanics 2",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-02",
+          "start": "16:00",
+          "end": "17:30",
+          "startMinutes": 960,
+          "endMinutes": 1050,
+          "durationMinutes": 90,
+          "entries": 18,
+          "fullSupervisionRequired": false,
+          "arrival": "15:40",
+          "venue": "E1406",
+          "note": "Public Holiday: Dragon Boat Festival",
+          "originalCode": "WME02 01",
+          "originalTitle": "M2: Mechanics 2"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wec14-01-economics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Economics",
+      "code": "WEC14 01",
+      "paper": "Unit 4: Developments in the Global Economy",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-03",
+          "start": "15:30",
+          "end": "17:30",
+          "startMinutes": 930,
+          "endMinutes": 1050,
+          "durationMinutes": 120,
+          "entries": 35,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406 E1405",
+          "note": "",
+          "originalCode": "WEC14 01",
+          "originalTitle": "Unit 4: Developments in the Global Economy"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wbs14-01-business",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Business",
+      "code": "WBS14 01",
+      "paper": "Unit 4: Global Business",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-04",
+          "start": "15:30",
+          "end": "17:30",
+          "startMinutes": 930,
+          "endMinutes": 1050,
+          "durationMinutes": 120,
+          "entries": 5,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WBS14 01",
+          "originalTitle": "Unit 4: Global Business"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-whi03-1d-history",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "History",
+      "code": "WHI03 1D",
+      "paper": "Unit 3 - Option 1D: Civil Rights and Race Relations in the USA, 1865-2009",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-05",
+          "start": "13:00",
+          "end": "15:00",
+          "startMinutes": 780,
+          "endMinutes": 900,
+          "durationMinutes": 120,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E2101",
+          "note": "",
+          "originalCode": "WHI03 1D",
+          "originalTitle": "Unit 3 - Option 1D: Civil Rights and Race Relations in the USA, 1865-2009"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wma14-01-mathematics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Mathematics",
+      "code": "WMA14 01",
+      "paper": "P4: Pure Mathematics 4",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-05",
+          "start": "16:00",
+          "end": "17:30",
+          "startMinutes": 960,
+          "endMinutes": 1050,
+          "durationMinutes": 90,
+          "entries": 41,
+          "fullSupervisionRequired": false,
+          "arrival": "15:40",
+          "venue": "E1406 E1405",
+          "note": "",
+          "originalCode": "WMA14 01",
+          "originalTitle": "P4: Pure Mathematics 4"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wbi15-01-biology",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Biology",
+      "code": "WBI15 01",
+      "paper": "Unit 5: Respiration, Internal Environment, Coordination and Gene Technology",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-06",
+          "start": "13:00",
+          "end": "14:45",
+          "startMinutes": 780,
+          "endMinutes": 885,
+          "durationMinutes": 105,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WBI15 01",
+          "originalTitle": "Unit 5: Respiration, Internal Environment, Coordination and Gene Technology"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wst02-01-further-mathematics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Further Mathematics",
+      "code": "WST02 01",
+      "paper": "S2: Statistics 2",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-06",
+          "start": "16:00",
+          "end": "17:30",
+          "startMinutes": 960,
+          "endMinutes": 1050,
+          "durationMinutes": 90,
+          "entries": 9,
+          "fullSupervisionRequired": false,
+          "arrival": "15:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WST02 01",
+          "originalTitle": "S2: Statistics 2"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wfm03-01-further-mathematics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Further Mathematics",
+      "code": "WFM03 01",
+      "paper": "FP3: Further Pure Mathematics 3",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-10",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 13,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1038",
+          "note": "",
+          "originalCode": "WFM03 01",
+          "originalTitle": "FP3: Further Pure Mathematics 3"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wbi16-01-biology",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Biology",
+      "code": "WBI16 01",
+      "paper": "Unit 6: Practical Skills in Biology II",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-11",
+          "start": "13:00",
+          "end": "14:20",
+          "startMinutes": 780,
+          "endMinutes": 860,
+          "durationMinutes": 80,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WBI16 01",
+          "originalTitle": "Unit 6: Practical Skills in Biology II"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wme03-01-further-mathematics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Further Mathematics",
+      "code": "WME03 01",
+      "paper": "M3: Mechanics 3",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-12",
+          "start": "13:00",
+          "end": "14:30",
+          "startMinutes": 780,
+          "endMinutes": 870,
+          "durationMinutes": 90,
+          "entries": 7,
+          "fullSupervisionRequired": false,
+          "arrival": "12:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WME03 01",
+          "originalTitle": "M3: Mechanics 3"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-whi04-1a-history",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "History",
+      "code": "WHI04 1A",
+      "paper": "Unit 4 - Option 1A: The Making of Modern Europe, 1805-71",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-12",
+          "start": "15:30",
+          "end": "17:30",
+          "startMinutes": 930,
+          "endMinutes": 1050,
+          "durationMinutes": 120,
+          "entries": 1,
+          "fullSupervisionRequired": false,
+          "arrival": "15:10",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WHI04 1A",
+          "originalTitle": "Unit 4 - Option 1A: The Making of Modern Europe, 1805-71"
+        }
+      ],
+      "defaultSession": "S1"
+    },
+    {
+      "id": "edexcel-a2-wst03-01-further-mathematics",
+      "level": "A2",
+      "board": "Edexcel",
+      "qualification": "Edexcel IAL",
+      "subject": "Further Mathematics",
+      "code": "WST03 01",
+      "paper": "S3: Statistics 3",
+      "variants": [
+        {
+          "session": "S1",
+          "date": "2025-06-13",
+          "start": "16:00",
+          "end": "17:30",
+          "startMinutes": 960,
+          "endMinutes": 1050,
+          "durationMinutes": 90,
+          "entries": 13,
+          "fullSupervisionRequired": false,
+          "arrival": "15:40",
+          "venue": "E1406",
+          "note": "",
+          "originalCode": "WST03 01",
+          "originalTitle": "S3: Statistics 3"
+        }
+      ],
+      "defaultSession": "S1"
+    }
+  ]
+}
