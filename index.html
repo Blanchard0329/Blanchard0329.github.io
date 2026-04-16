@@ -1,592 +1,117 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Jan Exam Calendar / 考试日历生成器</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <style>
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #c7c7cc; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
-        .fade-in-init { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .print-clean {
-            background-color: white !important;
-            color: black !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-    </style>
-</head>
-<body class="bg-slate-50 font-sans text-slate-800 min-h-screen py-8 px-4">
-
-    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden border border-slate-200 relative">
-        
-        <!-- 头部 -->
-        <div class="bg-indigo-700 p-8 text-white relative">
-            <button onclick="toggleLanguage()" class="absolute top-6 right-6 flex items-center gap-2 bg-indigo-800 hover:bg-indigo-900 text-xs font-bold py-1.5 px-3 rounded-full transition-colors border border-indigo-600">
-                <i data-lucide="languages" class="w-3 h-3"></i>
-                <span id="lang-btn-text">English</span>
-            </button>
-
-            <h1 class="text-3xl font-bold flex items-center gap-3">
-                <i data-lucide="calendar-days" class="w-8 h-8"></i>
-                <span id="header-title">2026 Jan Exam Calendar</span>
-            </h1>
-            
-            <p id="header-subtitle" class="mt-3 text-indigo-100 max-w-2xl leading-relaxed text-sm">
-                Edexcel IAL 2026年1月考季专属工具。
-            </p>
-
-            <div class="mt-4 p-3 bg-indigo-800/50 rounded-lg border border-indigo-600/50 flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-indigo-100">
-                <span class="flex items-center gap-2">
-                    <i data-lucide="book-open-check" class="w-4 h-4 text-yellow-300"></i>
-                    <span id="note-text-pre">备考复习资料 / Revision Notes:</span>
-                </span>
-                <a href="https://blanchard0329.notion.site/" target="_blank" class="font-bold text-white underline decoration-yellow-400 decoration-2 underline-offset-2 hover:text-yellow-200 transition-colors flex items-center gap-1">
-                    <span id="note-link-text">Blanchard's Notion Site</span>
-                    <i data-lucide="external-link" class="w-3 h-3"></i>
-                </a>
-            </div>
-
-            <div class="mt-2 text-xs text-indigo-300 flex items-center gap-2">
-                <i data-lucide="mail" class="w-3 h-3"></i>
-                <span>Feedback:</span>
-                <a href="mailto:Blanchard.0329@gmail.com" class="hover:text-white underline">Blanchard.0329@gmail.com</a>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2026 June Exam Calendar Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260416a" />
+  </head>
+  <body>
+    <div class="bg-layer" aria-hidden="true"></div>
+    <main class="app-shell">
+      <header class="hero-head">
+        <button id="langToggleBtn" class="lang-btn" type="button">
+          <span id="langBtnText">Switch to English</span>
+        </button>
+        <h1 id="headerTitle">2026 June 考试日历生成器</h1>
+        <p id="headerSubtitle">
+          支持 Edexcel IAL、Edexcel IGCSE、Cambridge IGCSE、Cambridge AS/A2。勾选后自动冲突处理并即时预览，可导出 PNG 和 ICS。
+        </p>
+        <div class="hero-note">
+          <span id="revisionLabel">备考复习资料 / Revision Notes:</span>
+          <a href="https://blanchard0329.notion.site/" target="_blank" rel="noreferrer">Blanchard's Notion Site</a>
         </div>
+      </header>
 
-        <div class="p-8">
-            <!-- 冲突提示横幅 (动态显示) -->
-            <div id="clash-alert" class="hidden mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-3">
-                <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 mt-0.5 shrink-0"></i>
-                <div class="text-sm text-amber-900">
-                    <p class="font-bold">Detected Clash: Maths P2 & Economics U2</p>
-                    <p>System has automatically adjusted Economics U2 to <b>15:50</b> with a <b>Supervised Break (15:30-15:50)</b>.</p>
-                </div>
+      <div class="content-area">
+        <section class="picker-pane">
+          <div id="pickerTitle" class="section-title">科目选择</div>
+
+          <div class="field-grid">
+            <label class="field">
+              <span id="searchLabel">搜索考试 / 科目 / 代码</span>
+              <input id="searchInput" type="search" placeholder="例如：WMA11 / Mathematics / Biology" />
+            </label>
+          </div>
+
+          <div id="levelFilter" class="level-filter" role="tablist" aria-label="Level Filter">
+            <button class="filter-chip is-active" type="button" data-level-filter="ALL">全部</button>
+            <button class="filter-chip" type="button" data-level-filter="IG">IG</button>
+            <button class="filter-chip" type="button" data-level-filter="AS">AS</button>
+            <button class="filter-chip" type="button" data-level-filter="A2">A2</button>
+          </div>
+
+          <div class="action-row">
+            <button id="selectVisibleBtn" class="btn btn-ghost" type="button">全选当前筛选</button>
+            <button id="clearVisibleBtn" class="btn btn-ghost" type="button">清空当前筛选</button>
+            <button id="generateBtn" class="btn btn-solid" type="button">手动刷新（可选）</button>
+          </div>
+
+          <div id="pickerStats" class="picker-stats"></div>
+          <div id="examPicker" class="exam-picker"></div>
+        </section>
+
+        <section class="preview-pane">
+          <div class="preview-bar">
+            <div class="preview-title-wrap">
+              <h2 id="previewTitle">已选考试预览</h2>
+              <p id="statusMessage" class="status-message"></p>
             </div>
-
-            <!-- 科目选择区域 -->
-            <div id="sections-container" class="space-y-8">
-                <!-- JS生成 -->
+            <div class="preview-actions">
+              <label class="alert-toggle">
+                <input id="alertToggle" type="checkbox" checked />
+                <span id="alertToggleLabel">添加考前提醒（1天前 & 2小时前）</span>
+              </label>
+              <div class="export-row">
+                <button id="exportPngBtn" class="btn btn-ghost" type="button" disabled>生成图片 (.png)</button>
+                <button id="exportIcsBtn" class="btn btn-solid" type="button" disabled>生成日历 (.ics)</button>
+              </div>
             </div>
+          </div>
 
-            <!-- 底部操作栏 -->
-            <div class="mt-10 pt-6 border-t border-slate-100 sticky bottom-0 bg-white/95 backdrop-blur-sm py-4 z-20">
-                <div class="flex flex-col xl:flex-row items-end justify-between gap-4">
-                    <div class="flex items-center gap-3 w-full xl:w-auto">
-                        <div id="bell-icon-container" class="p-2 rounded-full bg-indigo-100 shrink-0">
-                            <i data-lucide="bell" class="w-6 h-6 text-indigo-600"></i>
-                        </div>
-                        <div>
-                            <h2 id="preview-title" class="text-lg font-bold text-slate-900">Exam Preview</h2>
-                            <p id="preview-status-text" class="text-sm text-slate-500">Select subjects...</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-col sm:flex-row items-end sm:items-center gap-3 w-full xl:w-auto justify-end">
-                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-slate-600 hover:text-indigo-700 transition-colors bg-slate-50 px-3 py-2 rounded-lg border border-slate-200">
-                            <input type="checkbox" id="alert-toggle" checked class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500 accent-indigo-600">
-                            <span id="alert-label">Reminders (1 Day & 2 Hr)</span>
-                        </label>
+          <article id="printCard" class="print-card">
+            <h3 id="cardTitle">Personal Exam Calendar</h3>
+            <div id="summaryBlock" class="summary-block"></div>
+            <div id="warningBlock" class="warning-block"></div>
+            <ul id="timelineList" class="timeline-list"></ul>
+          </article>
+        </section>
+      </div>
+    </main>
 
-                        <div class="flex gap-2">
-                            <button id="generate-img-btn" disabled onclick="generateImage()" class="flex items-center gap-2 px-4 py-2.5 rounded-lg font-bold shadow-sm transition-all bg-slate-100 text-slate-400 cursor-not-allowed text-sm">
-                                <i data-lucide="image" class="w-4 h-4"></i>
-                                <span id="btn-img-text">Save Image</span>
-                            </button>
-
-                            <button id="generate-btn" disabled class="flex items-center gap-2 px-4 py-2.5 rounded-lg font-bold shadow-sm transition-all bg-slate-100 text-slate-400 cursor-not-allowed text-sm">
-                                <i data-lucide="download" class="w-4 h-4"></i>
-                                <span id="btn-ics-text">Get Calendar (.ics)</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 预览表格 -->
-            <div id="preview-container" class="mt-4 bg-slate-50 rounded-xl border border-slate-200 shadow-inner overflow-hidden max-h-[500px] overflow-y-auto hidden">
-                <table class="w-full text-left text-sm">
-                    <thead class="bg-slate-100 text-slate-500 font-medium border-b border-slate-200 sticky top-0 z-10">
-                        <tr>
-                            <th id="th-date" class="p-4">Date</th>
-                            <th id="th-time" class="p-4">Time</th>
-                            <th id="th-subject" class="p-4">Subject / Unit</th>
-                            <th id="th-location" class="p-4 hidden sm:table-cell">Venue</th>
-                        </tr>
-                    </thead>
-                    <tbody id="preview-table-body" class="divide-y divide-slate-200 bg-white">
-                        <!-- JS Insert -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="empty-state" class="mt-4 text-center py-12 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200">
-                <p id="empty-text" class="text-slate-400">Select subjects above to preview</p>
-            </div>
-
-            <div id="success-message" class="hidden mt-4 p-4 bg-emerald-50 border border-emerald-200 rounded-lg flex items-start gap-3 fade-in-init">
-                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5"></i>
-                <div class="text-sm text-emerald-800">
-                    <p id="success-title" class="font-bold">Success!</p>
-                    <p id="success-desc">File downloaded.</p>
-                </div>
-            </div>
+    <section id="imageExportContainer" class="image-export">
+      <div class="img-head">
+        <div>
+          <h2 id="imgTitle">2026 考试时间表</h2>
+          <p id="imgSubtitle">June 2026 Exam Series</p>
         </div>
-    </div>
-    
-    <div class="text-center mt-8 text-slate-400 text-xs">
-        <p>Edexcel IAL January 2026 Timetable • Unofficial Tool</p>
-    </div>
+        <div id="imgExamCount" class="img-count">0 Exams</div>
+      </div>
+      <table class="img-table">
+        <thead>
+          <tr>
+            <th id="imgThDate">日期</th>
+            <th id="imgThTime">时间</th>
+            <th id="imgThSubject">科目 / 单元</th>
+            <th id="imgThVenue">考场</th>
+          </tr>
+        </thead>
+        <tbody id="imgTableBody"></tbody>
+      </table>
+      <div id="imgFooter" class="img-footer">Good Luck! • Generated by Exam Calendar Tool</div>
+    </section>
 
-    <!-- 图片生成专用容器 (隐藏) -->
-    <div id="image-export-container" class="absolute top-0 left-0 -z-50 w-[900px] bg-white p-10 text-slate-900" style="transform: translateX(-9999px)">
-        <!-- 简单的黑白风格头部 -->
-        <div class="border-b-4 border-slate-800 pb-4 mb-6 flex justify-between items-end">
-            <div>
-                <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight" id="img-header-title">2026 Exam Schedule</h1>
-                <p class="text-slate-500 mt-1 font-medium" id="img-header-subtitle">Edexcel IAL January Series</p>
-            </div>
-            <div class="text-right">
-                <div class="text-3xl font-bold text-slate-900" id="img-total-count">0 Exams</div>
-            </div>
-        </div>
+    <footer id="footerText" class="app-footer">
+      2026 June External Exam Timetable • Unofficial Tool
+    </footer>
 
-        <!-- 极简表格，无背景色，确保清晰 -->
-        <div class="bg-white">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="border-b-2 border-slate-300 text-slate-500 text-sm uppercase tracking-wider">
-                        <th class="pb-2 w-1/4" id="img-th-date">Date</th>
-                        <th class="pb-2 w-1/5" id="img-th-time">Time</th>
-                        <th class="pb-2 w-1/3" id="img-th-subject">Subject</th>
-                        <th class="pb-2 w-1/5 text-right" id="img-th-venue">Venue</th>
-                    </tr>
-                </thead>
-                <tbody id="image-table-body" class="text-slate-800">
-                    <!-- JS Insert -->
-                </tbody>
-            </table>
-        </div>
-
-        <div class="mt-8 pt-4 border-t border-slate-200 text-center text-slate-400 text-xs">
-             Good Luck! • Generated by Exam Calendar Tool
-        </div>
-    </div>
-
-    <script>
-        // --- 1. 数据配置 (2026 Jan Edexcel IAL) ---
-        // 关键：Math P2 (WMA12) 和 Econ U2 (WEC12) 都在 Jan 13。
-        // 标准时间: Econ U2 14:00-15:45 (E1406)
-        // 冲突时间: Econ U2 15:50-17:35 (E1405) + Break 15:30-15:50
-        
-        // category 字段说明：'AS' 或 'A2'
-        // 新增 shortTitle 和 fullTitle
-        const RAW_EXAM_DATA = [
-            // --- AS Level ---
-            { id: 'WMA11', shortTitle: 'Math P1', fullTitle: 'Pure Mathematics 1', date: '2026-01-08', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },
-            { id: 'WMA12', shortTitle: 'Math P2', fullTitle: 'Pure Mathematics 2', date: '2026-01-13', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' }, // Conflict Source A
-            { id: 'WST01', shortTitle: 'Math S1', fullTitle: 'Statistics 1', date: '2026-01-14', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },
-            { id: 'WFM01', shortTitle: 'Math FP1', fullTitle: 'Further Pure Mathematics 1', date: '2026-01-12', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },           
-            { id: 'WFM02', shortTitle: 'Math FP2', fullTitle: 'Further Pure Mathematics 2', date: '2026-01-16', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },
-            { id: 'WST02', shortTitle: 'Math S2', fullTitle: 'Statistics 2', date: '2026-01-20', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'AS' },
-            { id: 'WEC11', shortTitle: 'Economics U1', fullTitle: 'Markets In Action', date: '2026-01-09', start: '17:00', end: '18:45', arrive: '16:40', room: 'E1406', duration: 105, category: 'AS' },
-            { id: 'WEC12', shortTitle: 'Economics U2', fullTitle: 'Macroeconomic Performance and Policy', date: '2026-01-13', start: '14:00', end: '15:45', arrive: '13:40', room: 'E1406', duration: 105, category: 'AS' }, // Conflict Source B
-            { id: 'WBS12', shortTitle: 'Business U2', fullTitle: 'Managing Business Activities', date: '2026-01-12', start: '14:00', end: '16:00', arrive: '13:40', room: 'E1406', duration: 120, category: 'AS' },
-
-            // --- A2 Level ---
-            { id: 'WMA13', shortTitle: 'Math P3', fullTitle: 'Pure Mathematics 3', date: '2026-01-19', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
-            { id: 'WMA14', shortTitle: 'Math P4', fullTitle: 'Pure Mathematics 4', date: '2026-01-22', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
-            { id: 'WME01', shortTitle: 'Math M1', fullTitle: 'Mechanics 1', date: '2026-01-09', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' }, 
-            { id: 'WDM11', shortTitle: 'Math D1', fullTitle: 'Decision Mathematics 1', date: '2026-01-20', start: '17:00', end: '18:30', arrive: '16:40', room: 'E1406', duration: 90, category: 'A2' },
-            { id: 'WME02', shortTitle: 'Math M2', fullTitle: 'Mechanics 2', date: '2026-01-15', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
-            { id: 'WME03', shortTitle: 'Math M3', fullTitle: 'Mechanics 3', date: '2026-01-21', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
-            { id: 'WFM03', shortTitle: 'Math FP3', fullTitle: 'Further Pure Mathematics 3', date: '2026-01-23', start: '14:00', end: '15:30', arrive: '13:40', room: 'E1406', duration: 90, category: 'A2' },
-            { id: 'WEC13', shortTitle: 'Economics U3', fullTitle: 'Business Behaviour', date: '2026-01-16', start: '14:00', end: '16:00', arrive: '13:40', room: 'E1406', duration: 120, category: 'A2' },
-            { id: 'WAC12', shortTitle: 'Accounting U2', fullTitle: 'Corporate and Management Accounting', date: '2026-01-22', start: '14:00', end: '17:00', arrive: '13:40', room: 'E1406', duration: 180, category: 'A2' },
-            { id: 'WB114', shortTitle: 'Biology U4', fullTitle: 'Energy, Environment, Microbiology', date: '2026-01-08', start: '14:00', end: '15:45', arrive: '13:40', room: 'E1406', duration: 105, category: 'A2' },
-            { id: 'WPH14', shortTitle: 'Physics U4', fullTitle: 'Further Mechanics, Fields and Particles', date: '2026-01-12', start: '14:00', end: '15:45', arrive: '13:40', room: 'E1406', duration: 105, category: 'A2' }
-        ];
-
-        const SECTIONS = [
-            { key: 'AS', title: 'AS Level (Year 11)', icon: 'layers' },
-            { key: 'A2', title: 'A2 Level (Year 12)', icon: 'graduation-cap' }
-        ];
-
-        // --- 2. 多语言 ---
-        const i18n = {
-            zh: {
-                btnLang: "Switch to English",
-                title: "2026 1月 考试日历生成器",
-                subtitle: "Edexcel IAL 2026年1月考季专属工具。",
-                noteTextPre: "备考复习资料 / Revision Notes:",
-                noteLinkText: "Blanchard's Notion Site",
-                previewTitle: "已选考试预览",
-                emptyText: "请在上方选择科目以预览详情",
-                alertLabel: "添加考前提醒 (1天前 & 2小时前)",
-                btnImg: "生成图片 (.png)",
-                btnIcs: "生成日历 (.ics)",
-                thDate: "日期",
-                thTime: "时间",
-                thSubject: "科目 / 单元",
-                thVenue: "考场",
-                arriveAt: "到达时间",
-                startAt: "开始",
-                clashAlertTitle: "检测到考试冲突: Maths P2 & Economics U2",
-                clashAlertDesc: "系统已自动将 Economics U2 调整至 <b>15:50</b>，并添加了 <b>隔离休息时间 (15:30-15:50)</b>。",
-                supervisedBreak: "⚠️ 隔离休息 Supervised Break",
-                breakTime: "15:30 - 15:50",
-                imgTitle: "2026 考试时间表",
-                imgSubtitle: "Edexcel IAL 1月考季",
-                successTitle: "操作成功！",
-                successDesc: "文件已下载。",
-                statusEmpty: "请选择科目...",
-                statusSelected: (n) => `共 ${n} 场考试`
-            },
-            en: {
-                btnLang: "切换为中文",
-                title: "2026 Jan Exam Calendar Generator",
-                subtitle: "Tool for Edexcel IAL Jan 2026 series.",
-                noteTextPre: "Revision Notes:",
-                noteLinkText: "Blanchard's Notion Site",
-                previewTitle: "Exam Preview",
-                emptyText: "Select subjects above to preview",
-                alertLabel: "Reminders (1 Day & 2 Hr)",
-                btnImg: "Save Image (.png)",
-                btnIcs: "Get Calendar (.ics)",
-                thDate: "Date",
-                thTime: "Time",
-                thSubject: "Subject / Unit",
-                thVenue: "Venue",
-                arriveAt: "Arrive",
-                startAt: "Start",
-                clashAlertTitle: "Clash Detected: Maths P2 & Economics U2",
-                clashAlertDesc: "System automatically adjusted Economics U2 to <b>15:50</b> with a <b>Supervised Break (15:30-15:50)</b>.",
-                supervisedBreak: "⚠️ Supervised Break",
-                breakTime: "15:30 - 15:50",
-                imgTitle: "2026 Exam Schedule",
-                imgSubtitle: "Edexcel IAL Jan Series",
-                successTitle: "Success!",
-                successDesc: "File downloaded.",
-                statusEmpty: "Select subjects...",
-                statusSelected: (n) => `${n} Exams Selected`
-            }
-        };
-
-        // --- 3. 核心逻辑 ---
-        let state = {
-            selectedIds: new Set(),
-            includeAlerts: true,
-            lang: 'zh'
-        };
-
-        function toggleLanguage() {
-            state.lang = state.lang === 'zh' ? 'en' : 'zh';
-            updateUI();
-        }
-
-        function toggleExam(id, btn) {
-            if (state.selectedIds.has(id)) {
-                state.selectedIds.delete(id);
-            } else {
-                state.selectedIds.add(id);
-            }
-            document.getElementById('success-message').classList.add('hidden');
-            renderButtons(); // 刷新按钮状态
-            updatePreview(); // 刷新预览表
-        }
-
-        // 处理冲突逻辑
-        function getProcessedExams() {
-            // 1. 获取所有选中的考试
-            let exams = RAW_EXAM_DATA.filter(e => state.selectedIds.has(e.id)).map(e => ({...e})); // 深拷贝避免修改原数据
-
-            // 2. 检测冲突: WMA12 (Math P2) 和 WEC12 (Econ U2)
-            const hasMathP2 = state.selectedIds.has('WMA12');
-            const hasEconU2 = state.selectedIds.has('WEC12');
-            const clashAlert = document.getElementById('clash-alert');
-            const t = i18n[state.lang];
-
-            if (hasMathP2 && hasEconU2) {
-                clashAlert.classList.remove('hidden');
-                clashAlert.querySelector('p.font-bold').innerText = t.clashAlertTitle;
-                clashAlert.querySelector('div p:last-child').innerHTML = t.clashAlertDesc;
-
-                // 找到 Econ U2 并修改
-                const econExam = exams.find(e => e.id === 'WEC12');
-                if (econExam) {
-                    econExam.start = '15:50';
-                    econExam.end = '17:35';
-                    econExam.room = 'E1405';
-                    econExam.isClashAdjusted = true;
-                    econExam.note = t.supervisedBreak + " (15:30-15:50)";
-                }
-            } else {
-                clashAlert.classList.add('hidden');
-            }
-
-            // 3. 排序
-            return exams.sort((a, b) => new Date(a.date + 'T' + a.start) - new Date(b.date + 'T' + b.start));
-        }
-
-        function renderButtons() {
-            const container = document.getElementById('sections-container');
-            if (container.children.length === 0) {
-                container.innerHTML = '';
-                SECTIONS.forEach(section => {
-                    const sectionExams = RAW_EXAM_DATA.filter(e => e.category === section.key);
-                    
-                    const secDiv = document.createElement('div');
-                    secDiv.className = 'fade-in-init';
-                    secDiv.innerHTML = `
-                        <h3 class="text-lg font-bold text-slate-700 flex items-center gap-2 mb-3 border-b border-slate-100 pb-2">
-                            <i data-lucide="${section.icon}" class="w-5 h-5 text-indigo-500"></i>
-                            ${section.title}
-                        </h3>
-                    `;
-                    
-                    const grid = document.createElement('div');
-                    grid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3';
-                    
-                    sectionExams.forEach(exam => {
-                        const btn = document.createElement('button');
-                        btn.id = `btn-${exam.id}`;
-                        btn.onclick = () => toggleExam(exam.id, btn);
-                        grid.appendChild(btn);
-                    });
-                    
-                    secDiv.appendChild(grid);
-                    container.appendChild(secDiv);
-                });
-            }
-
-            // 更新按钮状态
-            RAW_EXAM_DATA.forEach(exam => {
-                const btn = document.getElementById(`btn-${exam.id}`);
-                if (!btn) return;
-                
-                const isSelected = state.selectedIds.has(exam.id);
-                btn.className = `
-                    text-left p-3 rounded-xl border transition-all duration-200 group relative flex flex-col justify-between
-                    ${isSelected 
-                        ? 'bg-indigo-600 border-indigo-600 text-white shadow-md' 
-                        : 'bg-white border-slate-200 text-slate-600 hover:border-indigo-300 hover:shadow-sm'}
-                `;
-                
-                // 按钮内容结构更新：
-                // 1. ID (Top)
-                // 2. Short Title (Middle, Large)
-                // 3. Full Title (Middle, Small)
-                // 4. Date (Bottom)
-                btn.innerHTML = `
-                    <div>
-                        <div class="text-[10px] font-bold opacity-60 mb-1 uppercase tracking-wider">${exam.id}</div>
-                        <div class="font-bold text-lg leading-tight mb-0.5">${exam.shortTitle}</div>
-                        <div class="text-[11px] leading-tight opacity-80 mb-2 font-medium">${exam.fullTitle}</div>
-                    </div>
-                    <div class="text-xs flex items-center gap-1 opacity-90 mt-auto pt-2 border-t border-white/10">
-                        <i data-lucide="calendar" class="w-3 h-3"></i>
-                        <span>${exam.date.slice(5)}</span>
-                    </div>
-                    ${isSelected ? '<div class="absolute top-2 right-2"><i data-lucide="check-circle" class="w-4 h-4"></i></div>' : ''}
-                `;
-            });
-            lucide.createIcons();
-        }
-
-        function updatePreview() {
-            const exams = getProcessedExams();
-            const tbody = document.getElementById('preview-table-body');
-            const emptyState = document.getElementById('empty-state');
-            const previewContainer = document.getElementById('preview-container');
-            const genBtn = document.getElementById('generate-btn');
-            const imgBtn = document.getElementById('generate-img-btn');
-            const t = i18n[state.lang];
-
-            document.getElementById('preview-status-text').innerText = 
-                exams.length > 0 ? t.statusSelected(exams.length) : t.statusEmpty;
-
-            if (exams.length === 0) {
-                emptyState.classList.remove('hidden');
-                previewContainer.classList.add('hidden');
-                genBtn.disabled = true;
-                imgBtn.disabled = true;
-                genBtn.classList.add('bg-slate-100', 'text-slate-400', 'cursor-not-allowed');
-                genBtn.classList.remove('bg-indigo-600', 'text-white', 'hover:bg-indigo-700');
-                imgBtn.classList.add('bg-slate-100', 'text-slate-400', 'cursor-not-allowed');
-                imgBtn.classList.remove('bg-emerald-600', 'text-white', 'hover:bg-emerald-700');
-            } else {
-                emptyState.classList.add('hidden');
-                previewContainer.classList.remove('hidden');
-                genBtn.disabled = false;
-                imgBtn.disabled = false;
-                
-                genBtn.classList.remove('bg-slate-100', 'text-slate-400', 'cursor-not-allowed');
-                genBtn.classList.add('bg-indigo-600', 'text-white', 'hover:bg-indigo-700');
-                
-                imgBtn.classList.remove('bg-slate-100', 'text-slate-400', 'cursor-not-allowed');
-                imgBtn.classList.add('bg-emerald-600', 'text-white', 'hover:bg-emerald-700');
-
-                tbody.innerHTML = exams.map(e => `
-                    <tr class="hover:bg-slate-50 transition-colors">
-                        <td class="p-4 font-medium text-slate-900 whitespace-nowrap">${e.date}</td>
-                        <td class="p-4 text-slate-700 whitespace-nowrap">
-                            <div class="font-bold">${e.start} - ${e.end}</div>
-                            <div class="text-xs text-slate-500 mt-0.5">${t.arriveAt}: ${e.arrive}</div>
-                        </td>
-                        <td class="p-4">
-                            <div class="font-bold text-indigo-900 text-base">${e.shortTitle}</div>
-                            <div class="text-xs text-slate-500">${e.fullTitle}</div>
-                            ${e.isClashAdjusted ? `<div class="text-xs text-amber-600 font-bold mt-1 bg-amber-50 inline-block px-1 rounded">${t.supervisedBreak} ${t.breakTime}</div>` : ''}
-                        </td>
-                        <td class="p-4 hidden sm:table-cell text-slate-600 font-mono text-sm">${e.room}</td>
-                    </tr>
-                `).join('');
-            }
-        }
-
-        function updateUI() {
-            const t = i18n[state.lang];
-            document.getElementById('lang-btn-text').innerText = t.btnLang;
-            document.getElementById('header-title').innerText = t.title;
-            document.getElementById('header-subtitle').innerHTML = t.subtitle;
-            document.getElementById('note-text-pre').innerText = t.noteTextPre;
-            document.getElementById('note-link-text').innerText = t.noteLinkText;
-            document.getElementById('preview-title').innerText = t.previewTitle;
-            document.getElementById('empty-text').innerText = t.emptyText;
-            document.getElementById('alert-label').innerText = t.alertLabel;
-            document.getElementById('btn-img-text').innerText = t.btnImg;
-            document.getElementById('btn-ics-text').innerText = t.btnIcs;
-            
-            document.getElementById('th-date').innerText = t.thDate;
-            document.getElementById('th-time').innerText = t.thTime;
-            document.getElementById('th-subject').innerText = t.thSubject;
-            document.getElementById('th-location').innerText = t.thVenue;
-
-            document.getElementById('img-header-title').innerText = t.imgTitle;
-            document.getElementById('img-header-subtitle').innerText = t.imgSubtitle;
-            document.getElementById('img-th-date').innerText = t.thDate;
-            document.getElementById('img-th-time').innerText = t.thTime;
-            document.getElementById('img-th-subject').innerText = t.thSubject;
-            document.getElementById('img-th-venue').innerText = t.thVenue;
-
-            updatePreview();
-        }
-
-        // --- 生成 ICS ---
-        document.getElementById('generate-btn').onclick = () => {
-            const exams = getProcessedExams();
-            if (exams.length === 0) return;
-            const t = i18n[state.lang];
-            const useAlerts = document.getElementById('alert-toggle').checked;
-
-            let ics = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//MySchool//ExamSchedule//EN
-CALSCALE:GREGORIAN
-METHOD:PUBLISH
-`;
-            exams.forEach(e => {
-                const startStr = e.date.replace(/-/g, '') + 'T' + e.start.replace(':', '') + '00';
-                const endStr = e.date.replace(/-/g, '') + 'T' + e.end.replace(':', '') + '00';
-                const nowStr = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-
-                let desc = `Subject: ${e.shortTitle}\\nFull Name: ${e.fullTitle}\\nRoom: ${e.room}\\nArrive: ${e.arrive}`;
-                if (e.isClashAdjusted) desc += `\\nNote: ${t.supervisedBreak} ${t.breakTime}`;
-
-                let alarms = '';
-                if (useAlerts) {
-                    alarms = `BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:Exam Tomorrow: ${e.shortTitle}
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-PT2H
-ACTION:DISPLAY
-DESCRIPTION:Exam in 2h: ${e.shortTitle}
-END:VALARM`;
-                }
-
-                ics += `BEGIN:VEVENT
-UID:${e.id}-${Date.now()}@myschool.com
-DTSTAMP:${nowStr}
-DTSTART:${startStr}
-DTEND:${endStr}
-SUMMARY:📝 ${e.shortTitle}
-DESCRIPTION:${desc}
-LOCATION:${e.room}
-${alarms}
-END:VEVENT
-`;
-            });
-            ics += `END:VCALENDAR`;
-
-            const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = 'Exam_Schedule_2026.ics';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            document.getElementById('success-message').classList.remove('hidden');
-        };
-
-        // --- 生成图片 ---
-        window.generateImage = () => {
-            const exams = getProcessedExams();
-            if (exams.length === 0) return;
-            const t = i18n[state.lang];
-
-            const tbody = document.getElementById('image-table-body');
-            document.getElementById('img-total-count').innerText = `${exams.length} Exams`;
-
-            tbody.innerHTML = exams.map(e => `
-                <tr class="border-b border-slate-100 last:border-0">
-                    <td class="py-4 font-bold text-slate-800 align-top">${e.date}</td>
-                    <td class="py-4 align-top">
-                        <div class="text-lg font-bold text-slate-900">${e.start}</div>
-                        <div class="text-xs text-slate-500 mt-1 uppercase tracking-wide">Arrive ${e.arrive}</div>
-                    </td>
-                    <td class="py-4 align-top">
-                        <div class="font-bold text-lg text-slate-900">${e.shortTitle}</div>
-                        <div class="text-slate-600 text-sm mt-0.5">${e.fullTitle}</div>
-                        ${e.isClashAdjusted ? `<div class="mt-2 text-xs border border-slate-800 text-slate-800 px-2 py-1 inline-block font-bold">SUPERVISED BREAK 15:30-15:50</div>` : ''}
-                    </td>
-                    <td class="py-4 text-right align-top font-mono text-slate-600 font-bold text-lg">
-                        ${e.room}
-                    </td>
-                </tr>
-            `).join('');
-
-            const el = document.getElementById('image-export-container');
-            
-            html2canvas(el, {
-                scale: 2,
-                backgroundColor: '#ffffff', // 强制白底
-                useCORS: true
-            }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'My_Exam_Schedule_2026.png';
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-                document.getElementById('success-message').classList.remove('hidden');
-            });
-        };
-
-        // Init
-        renderButtons();
-        updateUI();
-
-    </script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script type="module" src="./app.js?v=20260416a"></script>
+  </body>
 </html>
